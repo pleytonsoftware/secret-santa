@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
-import { LanguageSwitcher } from "./LanguageSwitcher";
+import { LanguageSwitcher } from "./language-switcher";
 
 interface HeaderProps {
   locale: string;

@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { Header } from "@/components/Header";
-import { ParticipantTable } from "@/components/ParticipantTable";
-import { AddParticipantForm } from "@/components/AddParticipantForm";
-import { RandomizeButton } from "@/components/RandomizeButton";
-import { LoadingSpinner } from "@/components/LoadingSpinner";
+import { Header } from "@/components/header";
+import { ParticipantTable } from "@/components/participant-table";
+import { AddParticipantForm } from "@/components/add-participant-form";
+import { RandomizeButton } from "@/components/randomize-button";
+import { LoadingSpinner } from "@/components/loading-spinner";
 
 interface Participant {
   id: string;

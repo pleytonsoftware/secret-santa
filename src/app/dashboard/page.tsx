@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { authOptions } from "@/lib/auth";
-import { DashboardClient } from "./DashboardClient";
+import { DashboardClient } from "./dashboard-client";
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);

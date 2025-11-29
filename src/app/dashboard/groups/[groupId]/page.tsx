@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { authOptions } from "@/lib/auth";
-import { GroupDetailClient } from "./GroupDetailClient";
+import { GroupDetailClient } from "./group-detail-client";
 
 interface GroupDetailPageProps {
   params: Promise<{ groupId: string }>;

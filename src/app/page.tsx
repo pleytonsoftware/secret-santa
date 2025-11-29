@@ -2,8 +2,8 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { authOptions } from "@/lib/auth";
-import { LoginButton } from "@/components/LoginButton";
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { LoginButton } from "@/components/login-button";
+import { LanguageSwitcher } from "@/components/language-switcher";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);

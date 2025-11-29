@@ -3,10 +3,10 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Header } from "@/components/Header";
-import { GroupCard } from "@/components/GroupCard";
-import { CreateGroupForm } from "@/components/CreateGroupForm";
-import { LoadingSpinner } from "@/components/LoadingSpinner";
+import { Header } from "@/components/header";
+import { GroupCard } from "@/components/group-card";
+import { CreateGroupForm } from "@/components/create-group-form";
+import { LoadingSpinner } from "@/components/loading-spinner";
 
 interface Group {
   id: string;

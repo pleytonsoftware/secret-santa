@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 
+const SUPPORTED_LANGUAGES = ["en", "es"] as const;
+
 export async function POST(request: NextRequest) {
   try {
     const { locale } = await request.json();
 
-    if (!["en", "es"].includes(locale)) {
+    if (!SUPPORTED_LANGUAGES.includes(locale)) {
       return NextResponse.json({ error: "Invalid locale" }, { status: 400 });
     }
 
