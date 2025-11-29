@@ -1,0 +1,89 @@
+{
+  "auth": {
+    "login": "Sign in with Google",
+    "logout": "Sign out",
+    "welcomeBack": "Welcome back",
+    "signInPrompt": "Sign in to manage your Secret Santa groups",
+    "loginError": "Failed to sign in. Please try again."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "remove": "Remove",
+    "confirm": "Confirm",
+    "back": "Back",
+    "close": "Close",
+    "name": "Name",
+    "email": "Email",
+    "actions": "Actions",
+    "required": "Required"
+  },
+  "header": {
+    "title": "Secret Santa",
+    "dashboard": "Dashboard"
+  },
+  "dashboard": {
+    "title": "My Groups",
+    "subtitle": "Manage your Secret Santa groups",
+    "createGroup": "Create New Group",
+    "noGroups": "You don't have any Secret Santa groups yet.",
+    "noGroupsHint": "Create your first group to get started!",
+    "participants": "participants",
+    "finalized": "Finalized",
+    "notFinalized": "Not Finalized"
+  },
+  "group": {
+    "title": "Group Details",
+    "name": "Group Name",
+    "namePlaceholder": "Enter group name",
+    "description": "Description",
+    "descriptionPlaceholder": "Enter description (optional)",
+    "create": "Create Group",
+    "update": "Update Group",
+    "delete": "Delete Group",
+    "deleteConfirm": "Are you sure you want to delete this group? This action cannot be undone.",
+    "participants": "Participants",
+    "noParticipants": "No participants added yet.",
+    "addParticipant": "Add Participant",
+    "participantName": "Participant Name",
+    "participantEmail": "Participant Email",
+    "participantNamePlaceholder": "Enter name",
+    "participantEmailPlaceholder": "Enter email address",
+    "removeParticipant": "Remove Participant",
+    "removeParticipantConfirm": "Are you sure you want to remove this participant?",
+    "minParticipants": "You need at least 2 participants to randomize.",
+    "finalized": "Group Finalized",
+    "finalizedDescription": "Assignments have been made and emails have been sent. This group can no longer be edited.",
+    "cannotEditFinalized": "This group has been finalized and cannot be edited."
+  },
+  "randomize": {
+    "button": "Randomize & Send Emails",
+    "confirm": "Are you sure you want to randomize assignments and send emails to all participants? This will finalize the group and you won't be able to make changes.",
+    "success": "Assignments created and emails sent successfully!",
+    "error": "Failed to create assignments. Please try again.",
+    "sending": "Creating assignments and sending emails..."
+  },
+  "toast": {
+    "groupCreated": "Group created successfully!",
+    "groupUpdated": "Group updated successfully!",
+    "groupDeleted": "Group deleted successfully!",
+    "participantAdded": "Participant added successfully!",
+    "participantRemoved": "Participant removed successfully!",
+    "emailsSent": "Emails sent to all participants!",
+    "errorGeneric": "Something went wrong. Please try again.",
+    "errorDuplicateEmail": "A participant with this email already exists in this group.",
+    "errorInvalidEmail": "Please enter a valid email address.",
+    "errorMinParticipants": "You need at least 2 participants to randomize."
+  },
+  "validation": {
+    "nameRequired": "Name is required",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Please enter a valid email address",
+    "groupNameRequired": "Group name is required"
+  }
+}
