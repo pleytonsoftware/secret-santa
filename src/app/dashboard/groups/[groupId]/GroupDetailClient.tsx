@@ -41,33 +41,14 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
   const [editDescription, setEditDescription] = useState("");
   const [isSaving, setIsSaving] = useState(false);
 
-  useEffect(() => {
-    const fetchGroupData = async () => {
-      try {
-        const response = await fetch(`/api/groups/${groupId}`);
-        if (response.ok) {
-          const data = await response.json();
-          setGroup(data);
-          setEditName(data.name);
-          setEditDescription(data.description || "");
-        } else if (response.status === 404) {
-          toast.error("Group not found");
-          router.push("/dashboard");
-        }
-      } catch (error) {
-        console.error("Error fetching group:", error);
-        toast.error(t("toast.errorGeneric"));
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  // Shared function to handle API errors and display toast messages
+  const handleApiError = (error: unknown, fallbackMessage: string) => {
+    console.error(fallbackMessage, error);
+    toast.error(t("toast.errorGeneric"));
+  };
 
-    if (status === "authenticated") {
-      fetchGroupData();
-    }
-  }, [status, groupId, router, t]);
-
-  const fetchGroup = async () => {
+  // Shared function to fetch group data
+  const fetchGroupData = async () => {
     try {
       const response = await fetch(`/api/groups/${groupId}`);
       if (response.ok) {
@@ -80,12 +61,18 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
         router.push("/dashboard");
       }
     } catch (error) {
-      console.error("Error fetching group:", error);
-      toast.error(t("toast.errorGeneric"));
+      handleApiError(error, "Error fetching group:");
     } finally {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      fetchGroupData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status, groupId]);
 
   const handleRemoveParticipant = async (participantId: string) => {
     try {
@@ -101,7 +88,7 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
       }
 
       toast.success(t("toast.participantRemoved"));
-      fetchGroup();
+      fetchGroupData();
     } catch {
       toast.error(t("toast.errorGeneric"));
     }
@@ -134,7 +121,7 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
 
       toast.success(t("toast.groupUpdated"));
       setIsEditing(false);
-      fetchGroup();
+      fetchGroupData();
     } catch {
       toast.error(t("toast.errorGeneric"));
     } finally {
@@ -302,7 +289,7 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
               <AddParticipantForm
                 groupId={groupId}
                 isFinalized={group.isFinalized}
-                onAdd={fetchGroup}
+                onAdd={fetchGroupData}
               />
             </div>
           )}
@@ -315,7 +302,7 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
               groupId={groupId}
               participantCount={group.participants.length}
               isFinalized={group.isFinalized}
-              onRandomize={fetchGroup}
+              onRandomize={fetchGroupData}
             />
           </div>
         )}

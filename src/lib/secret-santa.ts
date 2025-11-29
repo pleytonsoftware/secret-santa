@@ -24,9 +24,13 @@ export function generateAssignments(participants: Participant[]): AssignmentData
     throw new Error("At least 2 participants are required for Secret Santa");
   }
 
-  // 1. Shuffle participants randomly using Fisher-Yates algorithm
+  // 1. Shuffle participants randomly using Fisher-Yates (Durstenfeld) algorithm
+  // This creates an unbiased permutation with O(n) complexity
   const shuffled = [...participants];
   for (let i = shuffled.length - 1; i > 0; i--) {
+    // Generate random index j where 0 <= j <= i
+    // We use (i + 1) to include the current index i in the selection range,
+    // ensuring each element has an equal probability of being selected
     const j = Math.floor(Math.random() * (i + 1));
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
