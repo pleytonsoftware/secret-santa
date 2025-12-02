@@ -1,59 +1,59 @@
+import type { Locale } from "@/i18n";
 import { Resend } from "resend";
 
 // Lazy initialization to avoid build-time errors
 let resendClient: Resend | null = null;
 
 function getResendClient(): Resend {
-  if (!resendClient) {
-    resendClient = new Resend(process.env.RESEND_API_KEY || "");
-  }
-  return resendClient;
+    if (!resendClient) {
+        resendClient = new Resend(process.env.RESEND_API_KEY || "");
+    }
+    return resendClient;
 }
 
 interface SendSecretSantaEmailParams {
-  giverName: string;
-  giverEmail: string;
-  receiverName: string;
-  groupName: string;
-  locale: string;
+    giverName: string;
+    giverEmail: string;
+    receiverName: string;
+    groupName: string;
+    locale: Locale;
 }
 
 const emailTemplates = {
-  en: {
-    subject: "🎅 Your Secret Santa Assignment",
-    greeting: (name: string) => `Hello ${name}!`,
-    intro: (groupName: string) =>
-      `You have been assigned a Secret Santa gift recipient in the group "${groupName}"!`,
-    assignment: (receiverName: string) =>
-      `You will be giving a gift to: <strong>${receiverName}</strong>`,
-    reminder: "Remember: Keep it a secret! 🤫",
-    closing:
-      "Have fun shopping and Happy Holidays!",
-    footer: "Secret Santa App",
-  },
-  es: {
-    subject: "🎅 Tu asignación de Amigo Secreto",
-    greeting: (name: string) => `¡Hola ${name}!`,
-    intro: (groupName: string) =>
-      `¡Se te ha asignado un destinatario de regalo en el grupo "${groupName}"!`,
-    assignment: (receiverName: string) =>
-      `Le darás un regalo a: <strong>${receiverName}</strong>`,
-    reminder: "Recuerda: ¡Mantenlo en secreto! 🤫",
-    closing: "¡Disfruta comprando y Felices Fiestas!",
-    footer: "Aplicación de Amigo Secreto",
-  },
+    en: {
+        subject: "🎅 Your Secret Santa Assignment",
+        greeting: (name: string) => `Hello ${name}!`,
+        intro: (groupName: string) =>
+            `You have been assigned a Secret Santa gift recipient in the group "${groupName}"!`,
+        assignment: (receiverName: string) =>
+            `You will be giving a gift to: <strong>${receiverName}</strong>`,
+        reminder: "Remember: Keep it a secret! 🤫",
+        closing: "Have fun shopping and Happy Holidays!",
+        footer: "Secret Santa App",
+    },
+    es: {
+        subject: "🎅 Tu asignación de Amigo Secreto",
+        greeting: (name: string) => `¡Hola ${name}!`,
+        intro: (groupName: string) =>
+            `¡Se te ha asignado un destinatario de regalo en el grupo "${groupName}"!`,
+        assignment: (receiverName: string) =>
+            `Le darás un regalo a: <strong>${receiverName}</strong>`,
+        reminder: "Recuerda: ¡Mantenlo en secreto! 🤫",
+        closing: "¡Disfruta comprando y Felices Fiestas!",
+        footer: "Aplicación de Amigo Secreto",
+    },
 };
 
 export async function sendSecretSantaEmail({
-  giverName,
-  giverEmail,
-  receiverName,
-  groupName,
-  locale,
+    giverName,
+    giverEmail,
+    receiverName,
+    groupName,
+    locale,
 }: SendSecretSantaEmailParams): Promise<{ success: boolean; error?: string }> {
-  const template = locale === "es" ? emailTemplates.es : emailTemplates.en;
+    const template = emailTemplates[locale] || emailTemplates.en;
 
-  const htmlContent = `
+    const htmlContent = `
     <!DOCTYPE html>
     <html>
       <head>
@@ -88,28 +88,33 @@ export async function sendSecretSantaEmail({
     </html>
   `;
 
-  try {
-    if (!process.env.RESEND_API_KEY) {
-      console.warn("RESEND_API_KEY not configured, email not sent");
-      return { success: true };
+    try {
+        if (!process.env.RESEND_API_KEY) {
+            console.warn("RESEND_API_KEY not configured, email not sent");
+            return { success: true };
+        }
+
+        const resend = getResendClient();
+        const { error } = await resend.emails.send({
+            from:
+                process.env.RESEND_FROM_EMAIL ||
+                "Secret Santa <onboarding@resend.dev>",
+            to: giverEmail,
+            subject: template.subject,
+            html: htmlContent,
+        });
+
+        if (error) {
+            console.error("Failed to send email:", error);
+            return { success: false, error: error.message };
+        }
+
+        return { success: true };
+    } catch (err) {
+        console.error("Email sending error:", err);
+        return {
+            success: false,
+            error: err instanceof Error ? err.message : "Unknown error",
+        };
     }
-
-    const resend = getResendClient();
-    const { error } = await resend.emails.send({
-      from: process.env.RESEND_FROM_EMAIL || "Secret Santa <onboarding@resend.dev>",
-      to: giverEmail,
-      subject: template.subject,
-      html: htmlContent,
-    });
-
-    if (error) {
-      console.error("Failed to send email:", error);
-      return { success: false, error: error.message };
-    }
-
-    return { success: true };
-  } catch (err) {
-    console.error("Email sending error:", err);
-    return { success: false, error: err instanceof Error ? err.message : "Unknown error" };
-  }
 }
