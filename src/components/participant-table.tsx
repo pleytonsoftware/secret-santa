@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { toast } from "sonner";
 
 interface Participant {
   id: string;
@@ -9,10 +10,19 @@ interface Participant {
   email: string;
 }
 
+interface Assignment {
+  id: string;
+  giverId: string;
+  lastEmailSentAt: string | null;
+}
+
 interface ParticipantTableProps {
   participants: Participant[];
   isFinalized: boolean;
   onRemove: (participantId: string) => Promise<void>;
+  groupId?: string;
+  assignments?: Assignment[];
+  onResendSuccess?: () => void;
 }
 
 // Christmas-themed avatars for participants
@@ -22,9 +32,13 @@ export function ParticipantTable({
   participants,
   isFinalized,
   onRemove,
+  groupId,
+  assignments = [],
+  onResendSuccess,
 }: ParticipantTableProps) {
   const t = useTranslations();
   const [removingId, setRemovingId] = useState<string | null>(null);
+  const [resendingId, setResendingId] = useState<string | null>(null);
 
   const handleRemove = async (participantId: string) => {
     if (isFinalized) return;
@@ -36,6 +50,69 @@ export function ParticipantTable({
       await onRemove(participantId);
     } finally {
       setRemovingId(null);
+    }
+  };
+
+  const getAssignmentForParticipant = (participantId: string) => {
+    return assignments.find((a) => a.giverId === participantId);
+  };
+
+  const canResendToParticipant = (participantId: string) => {
+    const assignment = getAssignmentForParticipant(participantId);
+    if (!assignment?.lastEmailSentAt) return true;
+
+    const lastSent = new Date(assignment.lastEmailSentAt);
+    const now = new Date();
+    const hoursSinceLastSend = (now.getTime() - lastSent.getTime()) / (1000 * 60 * 60);
+
+    return hoursSinceLastSend >= 24;
+  };
+
+  const getTimeUntilResendForParticipant = (participantId: string): string => {
+    const assignment = getAssignmentForParticipant(participantId);
+    if (!assignment?.lastEmailSentAt) return "";
+
+    const lastSent = new Date(assignment.lastEmailSentAt);
+    const nextAllowed = new Date(lastSent.getTime() + 24 * 60 * 60 * 1000);
+    const now = new Date();
+
+    const hoursRemaining = Math.ceil((nextAllowed.getTime() - now.getTime()) / (1000 * 60 * 60));
+
+    if (hoursRemaining <= 0) return "";
+    if (hoursRemaining === 1) return t("resend.waitOneHour");
+    return t("resend.waitHours", { hours: hoursRemaining });
+  };
+
+  const handleResendToParticipant = async (participantId: string, participantName: string) => {
+    if (!groupId) return;
+
+    if (!canResendToParticipant(participantId)) {
+      toast.error(getTimeUntilResendForParticipant(participantId));
+      return;
+    }
+
+    if (!confirm(t("resend.confirmIndividual", { name: participantName }))) {
+      return;
+    }
+
+    setResendingId(participantId);
+    try {
+      const response = await fetch(`/api/groups/${groupId}/participants/${participantId}/resend`, {
+        method: "POST",
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        toast.error(data.error || t("resend.error"));
+        return;
+      }
+
+      toast.success(t("resend.successIndividual", { name: participantName }));
+      onResendSuccess?.();
+    } catch {
+      toast.error(t("resend.error"));
+    } finally {
+      setResendingId(null);
     }
   };
 
@@ -98,10 +175,37 @@ export function ParticipantTable({
               <td className="text-base-content/60">{participant.email}</td>
               <td className="text-right">
                 {isFinalized ? (
-                  <span className="badge badge-success badge-sm gap-1">
-                    <span>✅</span>
-                    {t("group.assigned")}
-                  </span>
+                  <div className="flex items-center justify-end gap-2">
+                    <span className="badge badge-success badge-sm gap-1">
+                      <span>✅</span>
+                      {t("group.assigned")}
+                    </span>
+                    {groupId && (
+                      <button
+                        onClick={() => handleResendToParticipant(participant.id, participant.name)}
+                        disabled={resendingId === participant.id || !canResendToParticipant(participant.id)}
+                        className={`btn btn-xs gap-1 ${
+                          canResendToParticipant(participant.id)
+                            ? "btn-accent btn-outline hover:btn-accent"
+                            : "btn-disabled opacity-50"
+                        }`}
+                        title={
+                          canResendToParticipant(participant.id)
+                            ? t("resend.buttonIndividual")
+                            : getTimeUntilResendForParticipant(participant.id)
+                        }
+                      >
+                        {resendingId === participant.id ? (
+                          <span className="loading loading-spinner loading-xs"></span>
+                        ) : (
+                          <>
+                            <span>📧</span>
+                            {t("resend.buttonIndividualShort")}
+                          </>
+                        )}
+                      </button>
+                    )}
+                  </div>
                 ) : (
                   <button
                     onClick={() => handleRemove(participant.id)}

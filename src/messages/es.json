@@ -72,8 +72,12 @@
   },
   "resend": {
     "button": "Reenviar Correos",
+    "buttonIndividual": "Reenviar correo a este participante",
+    "buttonIndividualShort": "Reenviar",
     "confirm": "¿Estás seguro de que deseas reenviar los correos de asignación de Amigo Secreto a todos los participantes?",
+    "confirmIndividual": "¿Estás seguro de que deseas reenviar el correo de asignación de Amigo Secreto a {name}?",
     "success": "¡Correos reenviados con éxito!",
+    "successIndividual": "¡Correo reenviado con éxito a {name}!",
     "error": "Error al reenviar los correos. Por favor, inténtalo de nuevo.",
     "sending": "Reenviando correos...",
     "waitOneHour": "Por favor, espera 1 hora antes de reenviar los correos.",

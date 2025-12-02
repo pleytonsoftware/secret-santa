@@ -55,9 +55,11 @@ export function CreateGroupForm({ onCancel, onSuccess }: CreateGroupFormProps) {
 
   return (
     <dialog className="modal modal-open">
-      <div className="modal-box">
-        <h2 className="font-bold text-lg mb-4">
+      <div className="modal-box bg-base-100 shadow-2xl border border-base-300">
+        <h2 className="font-bold text-lg mb-4 flex items-center gap-2">
+          <span className="text-2xl">🎄</span>
           {t("dashboard.createGroup")}
+          <span className="text-2xl">🎁</span>
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="form-control">

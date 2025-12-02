@@ -72,8 +72,12 @@
   },
   "resend": {
     "button": "Resend Emails",
+    "buttonIndividual": "Resend email to this participant",
+    "buttonIndividualShort": "Resend",
     "confirm": "Are you sure you want to resend the Secret Santa assignment emails to all participants?",
+    "confirmIndividual": "Are you sure you want to resend the Secret Santa assignment email to {name}?",
     "success": "Emails resent successfully!",
+    "successIndividual": "Email resent successfully to {name}!",
     "error": "Failed to resend emails. Please try again.",
     "sending": "Resending emails...",
     "waitOneHour": "Please wait 1 hour before resending emails.",

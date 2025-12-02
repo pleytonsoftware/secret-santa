@@ -18,6 +18,12 @@ interface Participant {
   email: string;
 }
 
+interface Assignment {
+  id: string;
+  giverId: string;
+  lastEmailSentAt: string | null;
+}
+
 interface Group {
   id: string;
   name: string;
@@ -25,6 +31,7 @@ interface Group {
   isFinalized: boolean;
   lastEmailSentAt: string | null;
   participants: Participant[];
+  assignments: Assignment[];
 }
 
 interface GroupDetailClientProps {
@@ -357,6 +364,9 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
               participants={group.participants}
               isFinalized={group.isFinalized}
               onRemove={handleRemoveParticipant}
+              groupId={groupId}
+              assignments={group.assignments}
+              onResendSuccess={fetchGroupData}
             />
 
             {!group.isFinalized && (

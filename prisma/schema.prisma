@@ -95,15 +95,16 @@ model Participant {
 }
 
 model Assignment {
-  id         String           @id @default(cuid())
-  groupId    String
-  group      SecretSantaGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
-  giverId    String
-  giver      Participant      @relation("giver", fields: [giverId], references: [id], onDelete: Cascade)
-  receiverId String
-  receiver   Participant      @relation("receiver", fields: [receiverId], references: [id], onDelete: Cascade)
-  emailSent  Boolean          @default(false)
-  createdAt  DateTime         @default(now())
+  id              String           @id @default(cuid())
+  groupId         String
+  group           SecretSantaGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  giverId         String
+  giver           Participant      @relation("giver", fields: [giverId], references: [id], onDelete: Cascade)
+  receiverId      String
+  receiver        Participant      @relation("receiver", fields: [receiverId], references: [id], onDelete: Cascade)
+  emailSent       Boolean          @default(false)
+  lastEmailSentAt DateTime?
+  createdAt       DateTime         @default(now())
 
   @@unique([groupId, giverId])
   @@map("assignments")
