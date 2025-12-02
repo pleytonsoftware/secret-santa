@@ -59,14 +59,16 @@
     "minParticipants": "Necesitas al menos 2 participantes para realizar el sorteo.",
     "finalized": "Grupo Finalizado",
     "finalizedDescription": "Las asignaciones se han realizado y los correos se han enviado. Este grupo ya no se puede editar.",
-    "cannotEditFinalized": "Este grupo ha sido finalizado y no se puede editar."
+    "cannotEditFinalized": "Este grupo ha sido finalizado y no se puede editar.",
+    "assigned": "Asignado"
   },
   "randomize": {
     "button": "Sortear y Enviar Correos",
     "confirm": "¿Estás seguro de que deseas realizar el sorteo y enviar correos a todos los participantes? Esto finalizará el grupo y no podrás hacer cambios.",
     "success": "¡Asignaciones creadas y correos enviados con éxito!",
     "error": "Error al crear las asignaciones. Por favor, inténtalo de nuevo.",
-    "sending": "Creando asignaciones y enviando correos..."
+    "sending": "Creando asignaciones y enviando correos...",
+    "tip": "Esta acción es permanente y enviará correos a todos los participantes."
   },
   "resend": {
     "button": "Reenviar Correos",
@@ -75,7 +77,8 @@
     "error": "Error al reenviar los correos. Por favor, inténtalo de nuevo.",
     "sending": "Reenviando correos...",
     "waitOneHour": "Por favor, espera 1 hora antes de reenviar los correos.",
-    "waitHours": "Por favor, espera {hours} horas antes de reenviar los correos."
+    "waitHours": "Por favor, espera {hours} horas antes de reenviar los correos.",
+    "lastSent": "Último envío:"
   },
   "toast": {
     "groupCreated": "¡Grupo creado con éxito!",

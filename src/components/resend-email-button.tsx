@@ -83,30 +83,57 @@ export function ResendEmailButton({
   const isDisabled = !canResendEmail() || isLoading;
 
   return (
-    <div className="space-y-2">
-      <button
-        onClick={handleResendEmails}
-        disabled={isDisabled}
-        className={`btn btn-outline btn-accent w-full gap-2 ${
-          isDisabled ? "btn-disabled" : ""
-        }`}
-      >
-        {isLoading ? (
-          <>
-            <span className="loading loading-spinner loading-sm"></span>
-            {t("resend.sending")}
-          </>
-        ) : (
-          <>
-            <span>📧</span>
-            {t("resend.button")}
-          </>
+    <div className="space-y-4">
+      {/* Main resend button */}
+      <div className="relative">
+        {/* Glow effect for enabled state */}
+        {!isDisabled && (
+          <div className="absolute inset-0 bg-gradient-to-r from-accent via-warning to-accent rounded-xl blur-lg opacity-20 animate-pulse" />
         )}
-      </button>
+        
+        <button
+          onClick={handleResendEmails}
+          disabled={isDisabled}
+          className={`relative btn btn-lg w-full gap-3 text-lg ${
+            isDisabled
+              ? "btn-disabled opacity-50"
+              : "btn-accent bg-gradient-to-r from-accent to-warning border-0 text-accent-content shadow-xl hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
+          }`}
+        >
+          {isLoading ? (
+            <>
+              <span className="loading loading-spinner loading-md"></span>
+              <span className="animate-pulse">{t("resend.sending")}</span>
+              <span className="text-2xl animate-bounce">✉️</span>
+            </>
+          ) : (
+            <>
+              <span className="text-2xl">📧</span>
+              {t("resend.button")}
+              <span className="text-2xl">✨</span>
+            </>
+          )}
+        </button>
+      </div>
+
+      {/* Time remaining indicator */}
       {!canResendEmail() && (
-        <p className="text-sm text-base-content/60 text-center">
-          {getTimeUntilResend()}
-        </p>
+        <div className="flex items-center justify-center gap-2 p-3 bg-base-200/50 rounded-xl border border-base-300">
+          <span className="text-xl">⏳</span>
+          <p className="text-sm text-base-content/60">
+            {getTimeUntilResend()}
+          </p>
+        </div>
+      )}
+
+      {/* Last sent indicator */}
+      {lastEmailSentAt && canResendEmail() && (
+        <div className="flex items-center justify-center gap-2 text-sm text-base-content/50">
+          <span>✅</span>
+          <span>
+            {t("resend.lastSent") || "Last sent:"} {new Date(lastEmailSentAt).toLocaleDateString()}
+          </span>
+        </div>
       )}
     </div>
   );

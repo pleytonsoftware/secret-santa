@@ -78,34 +78,54 @@ export function AddParticipantForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-base-200 rounded-box p-4">
-      <h4 className="font-medium text-base-content mb-3">
-        {t("group.addParticipant")}
-      </h4>
-      <div className="flex flex-col sm:flex-row gap-3">
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder={t("group.participantNamePlaceholder")}
-          className="input input-bordered flex-1"
-          disabled={isLoading}
-        />
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder={t("group.participantEmailPlaceholder")}
-          className="input input-bordered flex-1"
-          disabled={isLoading}
-        />
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="btn btn-secondary"
-        >
-          {isLoading ? <span className="loading loading-spinner loading-sm"></span> : t("common.add")}
-        </button>
+    <form onSubmit={handleSubmit} className="relative">
+      {/* Festive background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 via-base-200 to-primary/5 rounded-2xl" />
+      
+      <div className="relative bg-base-200/80 backdrop-blur-sm rounded-2xl p-5 border border-secondary/10">
+        <div className="flex flex-col sm:flex-row gap-4">
+          {/* Name input with icon */}
+          <div className="relative flex-1">
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-lg">👤</span>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder={t("group.participantNamePlaceholder")}
+              className="input input-bordered w-full pl-10 focus:input-secondary transition-all"
+              disabled={isLoading}
+            />
+          </div>
+          
+          {/* Email input with icon */}
+          <div className="relative flex-1">
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-lg">📧</span>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder={t("group.participantEmailPlaceholder")}
+              className="input input-bordered w-full pl-10 focus:input-secondary transition-all"
+              disabled={isLoading}
+            />
+          </div>
+          
+          {/* Submit button */}
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="btn btn-secondary gap-2 min-w-[120px] shadow-md hover:shadow-lg transition-all hover:scale-105"
+          >
+            {isLoading ? (
+              <span className="loading loading-spinner loading-sm"></span>
+            ) : (
+              <>
+                <span className="text-lg">➕</span>
+                {t("common.add")}
+              </>
+            )}
+          </button>
+        </div>
       </div>
     </form>
   );

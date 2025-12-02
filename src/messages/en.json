@@ -59,14 +59,16 @@
     "minParticipants": "You need at least 2 participants to randomize.",
     "finalized": "Group Finalized",
     "finalizedDescription": "Assignments have been made and emails have been sent. This group can no longer be edited.",
-    "cannotEditFinalized": "This group has been finalized and cannot be edited."
+    "cannotEditFinalized": "This group has been finalized and cannot be edited.",
+    "assigned": "Assigned"
   },
   "randomize": {
     "button": "Randomize & Send Emails",
     "confirm": "Are you sure you want to randomize assignments and send emails to all participants? This will finalize the group and you won't be able to make changes.",
     "success": "Assignments created and emails sent successfully!",
     "error": "Failed to create assignments. Please try again.",
-    "sending": "Creating assignments and sending emails..."
+    "sending": "Creating assignments and sending emails...",
+    "tip": "This action is permanent and will send emails to all participants."
   },
   "resend": {
     "button": "Resend Emails",
@@ -75,7 +77,8 @@
     "error": "Failed to resend emails. Please try again.",
     "sending": "Resending emails...",
     "waitOneHour": "Please wait 1 hour before resending emails.",
-    "waitHours": "Please wait {hours} hours before resending emails."
+    "waitHours": "Please wait {hours} hours before resending emails.",
+    "lastSent": "Last sent:"
   },
   "toast": {
     "groupCreated": "Group created successfully!",
