@@ -68,6 +68,15 @@
     "error": "Error al crear las asignaciones. Por favor, inténtalo de nuevo.",
     "sending": "Creando asignaciones y enviando correos..."
   },
+  "resend": {
+    "button": "Reenviar Correos",
+    "confirm": "¿Estás seguro de que deseas reenviar los correos de asignación de Amigo Secreto a todos los participantes?",
+    "success": "¡Correos reenviados con éxito!",
+    "error": "Error al reenviar los correos. Por favor, inténtalo de nuevo.",
+    "sending": "Reenviando correos...",
+    "waitOneHour": "Por favor, espera 1 hora antes de reenviar los correos.",
+    "waitHours": "Por favor, espera {hours} horas antes de reenviar los correos."
+  },
   "toast": {
     "groupCreated": "¡Grupo creado con éxito!",
     "groupUpdated": "¡Grupo actualizado con éxito!",

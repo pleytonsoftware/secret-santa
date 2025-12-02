@@ -15,41 +15,42 @@ export function Header({ locale }: HeaderProps) {
   const t = useTranslations();
 
   return (
-    <header className="bg-gradient-to-r from-red-600 to-green-600 text-white shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <Link href="/dashboard" className="flex items-center gap-2">
-            <span className="text-2xl">🎅</span>
-            <span className="font-bold text-xl">{t("header.title")}</span>
-          </Link>
+    <header className="navbar bg-gradient-to-r from-primary to-secondary text-primary-content shadow-lg">
+      <div className="navbar-start">
+        <Link href="/dashboard" className="btn btn-ghost text-xl gap-2">
+          <span className="text-2xl">🎅</span>
+          <span className="font-bold">{t("header.title")}</span>
+        </Link>
+      </div>
 
-          <div className="flex items-center gap-4">
-            <LanguageSwitcher currentLocale={locale} />
+      <div className="navbar-end gap-4">
+        <LanguageSwitcher currentLocale={locale} />
 
-            {session?.user && (
-              <div className="flex items-center gap-3">
-                {session.user.image && (
+        {session?.user && (
+          <div className="flex items-center gap-3">
+            {session.user.image && (
+              <div className="avatar">
+                <div className="w-8 rounded-full ring ring-primary-content ring-offset-base-100 ring-offset-1">
                   <Image
                     src={session.user.image}
                     alt={session.user.name || "User"}
                     width={32}
                     height={32}
-                    className="rounded-full border-2 border-white"
                   />
-                )}
-                <span className="hidden sm:block text-sm">
-                  {session.user.name}
-                </span>
-                <button
-                  onClick={() => signOut({ callbackUrl: "/" })}
-                  className="text-sm bg-white/20 hover:bg-white/30 px-3 py-1 rounded transition-colors"
-                >
-                  {t("auth.logout")}
-                </button>
+                </div>
               </div>
             )}
+            <span className="hidden sm:block text-sm">
+              {session.user.name}
+            </span>
+            <button
+              onClick={() => signOut({ callbackUrl: "/" })}
+              className="btn btn-sm btn-ghost bg-white/20 hover:bg-white/30"
+            >
+              {t("auth.logout")}
+            </button>
           </div>
-        </div>
+        )}
       </div>
     </header>
   );

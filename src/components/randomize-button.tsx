@@ -68,15 +68,15 @@ export function RandomizeButton({
       <button
         onClick={handleRandomize}
         disabled={isDisabled}
-        className={`w-full py-3 px-6 rounded-lg font-medium transition-all flex items-center justify-center gap-2 ${
+        className={`btn btn-lg w-full gap-2 ${
           isDisabled
-            ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-            : "bg-gradient-to-r from-red-600 to-green-600 text-white hover:from-red-700 hover:to-green-700 shadow-md hover:shadow-lg"
+            ? "btn-disabled"
+            : "btn-primary bg-gradient-to-r from-primary to-secondary border-0 hover:from-primary/90 hover:to-secondary/90"
         }`}
       >
         {isLoading ? (
           <>
-            <span className="animate-spin">🎲</span>
+            <span className="loading loading-spinner"></span>
             {t("randomize.sending")}
           </>
         ) : (
@@ -87,7 +87,7 @@ export function RandomizeButton({
         )}
       </button>
       {!isFinalized && participantCount < 2 && (
-        <p className="text-sm text-yellow-600 text-center">
+        <p className="text-sm text-warning text-center">
           {t("group.minParticipants")}
         </p>
       )}

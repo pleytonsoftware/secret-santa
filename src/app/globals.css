@@ -1,26 +1,60 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@plugin "daisyui" {
+  themes: christmas --default;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  [data-theme="christmas"] {
+    --p: 0 79% 45%;          /* #c81e1e - Santa Red */
+    --pf: 0 79% 35%;         /* Darker Santa Red */
+    --pc: 0 0% 100%;         /* White text on primary */
+    
+    --s: 141 69% 17%;        /* #14532d - Forest Green */
+    --sf: 141 69% 12%;       /* Darker Forest Green */
+    --sc: 0 0% 100%;         /* White text on secondary */
+    
+    --a: 45 93% 47%;         /* #eab308 - Gold */
+    --af: 45 93% 37%;        /* Darker Gold */
+    --ac: 0 0% 10%;          /* Dark text on accent */
+    
+    --n: 215 28% 17%;        /* #1f2937 - Dark Slate */
+    --nf: 215 28% 12%;       /* Darker Slate */
+    --nc: 0 0% 100%;         /* White text on neutral */
+    
+    --b1: 0 0% 100%;         /* #ffffff - Clean White */
+    --b2: 210 40% 98%;       /* Light gray */
+    --b3: 210 40% 96%;       /* Slightly darker */
+    --bc: 215 28% 17%;       /* Dark text on base */
+    
+    --in: 199 89% 48%;       /* #38bdf8 - Info */
+    --inc: 0 0% 100%;
+    
+    --su: 142 69% 58%;       /* #4ade80 - Success */
+    --suc: 0 0% 10%;
+    
+    --wa: 48 96% 53%;        /* #facc15 - Warning */
+    --wac: 0 0% 10%;
+    
+    --er: 0 84% 60%;         /* #ef4444 - Error */
+    --erc: 0 0% 100%;
+    
+    --rounded-box: 1rem;
+    --rounded-btn: 0.5rem;
+    --rounded-badge: 1.9rem;
+    --animation-btn: 0.25s;
+    --animation-input: .2s;
+    --btn-focus-scale: 0.95;
+    --border-btn: 1px;
+    --tab-border: 1px;
+    --tab-radius: 0.5rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+html[data-theme="christmas"] {
+  color-scheme: light;
 }

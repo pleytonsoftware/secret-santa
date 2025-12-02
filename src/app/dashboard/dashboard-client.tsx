@@ -58,20 +58,20 @@ export function DashboardClient({ locale }: DashboardClientProps) {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-base-200">
       <Header locale={locale} />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">
+            <h1 className="text-3xl font-bold text-base-content">
               {t("dashboard.title")}
             </h1>
-            <p className="text-gray-600 mt-1">{t("dashboard.subtitle")}</p>
+            <p className="text-base-content/70 mt-1">{t("dashboard.subtitle")}</p>
           </div>
           <button
             onClick={() => setShowCreateForm(true)}
-            className="flex items-center gap-2 bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors shadow-md"
+            className="btn btn-primary gap-2"
           >
             <span className="text-xl">+</span>
             {t("dashboard.createGroup")}
@@ -81,10 +81,10 @@ export function DashboardClient({ locale }: DashboardClientProps) {
         {groups.length === 0 ? (
           <div className="text-center py-16">
             <span className="text-6xl block mb-4">🎄</span>
-            <h2 className="text-xl font-medium text-gray-700 mb-2">
+            <h2 className="text-xl font-medium text-base-content mb-2">
               {t("dashboard.noGroups")}
             </h2>
-            <p className="text-gray-500">{t("dashboard.noGroupsHint")}</p>
+            <p className="text-base-content/60">{t("dashboard.noGroupsHint")}</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

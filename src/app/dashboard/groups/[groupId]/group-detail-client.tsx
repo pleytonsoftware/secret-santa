@@ -9,6 +9,7 @@ import { Header } from "@/components/header";
 import { ParticipantTable } from "@/components/participant-table";
 import { AddParticipantForm } from "@/components/add-participant-form";
 import { RandomizeButton } from "@/components/randomize-button";
+import { ResendEmailButton } from "@/components/resend-email-button";
 import { LoadingSpinner } from "@/components/loading-spinner";
 
 interface Participant {
@@ -22,6 +23,7 @@ interface Group {
   name: string;
   description: string | null;
   isFinalized: boolean;
+  lastEmailSentAt: string | null;
   participants: Participant[];
 }
 
@@ -163,149 +165,152 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-base-200">
       <Header locale={locale} />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Back button */}
         <button
           onClick={() => router.push("/dashboard")}
-          className="flex items-center gap-2 text-gray-600 hover:text-gray-800 mb-6"
+          className="btn btn-ghost btn-sm gap-2 mb-6"
         >
           ← {t("common.back")}
         </button>
 
         {/* Finalized banner */}
         {group.isFinalized && (
-          <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-            <div className="flex items-center gap-3">
-              <span className="text-2xl">✅</span>
-              <div>
-                <h3 className="font-medium text-green-800">
-                  {t("group.finalized")}
-                </h3>
-                <p className="text-sm text-green-700">
-                  {t("group.finalizedDescription")}
-                </p>
-              </div>
+          <div className="alert alert-success mb-6">
+            <span className="text-2xl">✅</span>
+            <div>
+              <h3 className="font-bold">{t("group.finalized")}</h3>
+              <p className="text-sm">{t("group.finalizedDescription")}</p>
             </div>
           </div>
         )}
 
         {/* Group header */}
-        <div className="bg-white rounded-xl shadow-md p-6 mb-6">
-          {isEditing && !group.isFinalized ? (
-            <form onSubmit={handleUpdateGroup} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {t("group.name")}
-                </label>
-                <input
-                  type="text"
-                  value={editName}
-                  onChange={(e) => setEditName(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-                  disabled={isSaving}
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {t("group.description")}
-                </label>
-                <textarea
-                  value={editDescription}
-                  onChange={(e) => setEditDescription(e.target.value)}
-                  rows={2}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 resize-none"
-                  disabled={isSaving}
-                />
-              </div>
-              <div className="flex gap-3 justify-end">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsEditing(false);
-                    setEditName(group.name);
-                    setEditDescription(group.description || "");
-                  }}
-                  disabled={isSaving}
-                  className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
-                >
-                  {t("common.cancel")}
-                </button>
-                <button
-                  type="submit"
-                  disabled={isSaving}
-                  className="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50"
-                >
-                  {isSaving ? t("common.loading") : t("common.save")}
-                </button>
-              </div>
-            </form>
-          ) : (
-            <div className="flex justify-between items-start">
-              <div>
-                <h1 className="text-2xl font-bold text-gray-800">
-                  {group.name}
-                </h1>
-                {group.description && (
-                  <p className="text-gray-600 mt-1">{group.description}</p>
-                )}
-              </div>
-              {!group.isFinalized && (
-                <div className="flex gap-2">
+        <div className="card bg-base-100 shadow-md mb-6">
+          <div className="card-body">
+            {isEditing && !group.isFinalized ? (
+              <form onSubmit={handleUpdateGroup} className="space-y-4">
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">{t("group.name")}</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={editName}
+                    onChange={(e) => setEditName(e.target.value)}
+                    className="input input-bordered w-full"
+                    disabled={isSaving}
+                  />
+                </div>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">{t("group.description")}</span>
+                  </label>
+                  <textarea
+                    value={editDescription}
+                    onChange={(e) => setEditDescription(e.target.value)}
+                    rows={2}
+                    className="textarea textarea-bordered w-full"
+                    disabled={isSaving}
+                  />
+                </div>
+                <div className="flex gap-3 justify-end">
                   <button
-                    onClick={() => setIsEditing(true)}
-                    className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                    type="button"
+                    onClick={() => {
+                      setIsEditing(false);
+                      setEditName(group.name);
+                      setEditDescription(group.description || "");
+                    }}
+                    disabled={isSaving}
+                    className="btn btn-ghost"
                   >
-                    {t("common.edit")}
+                    {t("common.cancel")}
                   </button>
                   <button
-                    onClick={handleDeleteGroup}
-                    className="px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                    type="submit"
+                    disabled={isSaving}
+                    className="btn btn-primary"
                   >
-                    {t("common.delete")}
+                    {isSaving ? <span className="loading loading-spinner loading-sm"></span> : t("common.save")}
                   </button>
                 </div>
-              )}
-            </div>
-          )}
+              </form>
+            ) : (
+              <div className="flex justify-between items-start">
+                <div>
+                  <h1 className="card-title text-2xl">{group.name}</h1>
+                  {group.description && (
+                    <p className="text-base-content/70 mt-1">{group.description}</p>
+                  )}
+                </div>
+                {!group.isFinalized && (
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setIsEditing(true)}
+                      className="btn btn-ghost btn-sm"
+                    >
+                      {t("common.edit")}
+                    </button>
+                    <button
+                      onClick={handleDeleteGroup}
+                      className="btn btn-ghost btn-sm text-error"
+                    >
+                      {t("common.delete")}
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Participants section */}
-        <div className="bg-white rounded-xl shadow-md p-6 mb-6">
-          <h2 className="text-lg font-semibold text-gray-800 mb-4">
-            {t("group.participants")} ({group.participants.length})
-          </h2>
+        <div className="card bg-base-100 shadow-md mb-6">
+          <div className="card-body">
+            <h2 className="card-title">
+              {t("group.participants")} ({group.participants.length})
+            </h2>
 
-          <ParticipantTable
-            participants={group.participants}
-            isFinalized={group.isFinalized}
-            onRemove={handleRemoveParticipant}
-          />
+            <ParticipantTable
+              participants={group.participants}
+              isFinalized={group.isFinalized}
+              onRemove={handleRemoveParticipant}
+            />
 
-          {!group.isFinalized && (
-            <div className="mt-6">
-              <AddParticipantForm
-                groupId={groupId}
-                isFinalized={group.isFinalized}
-                onAdd={fetchGroupData}
-              />
-            </div>
-          )}
+            {!group.isFinalized && (
+              <div className="mt-6">
+                <AddParticipantForm
+                  groupId={groupId}
+                  isFinalized={group.isFinalized}
+                  onAdd={fetchGroupData}
+                />
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* Randomize button */}
-        {!group.isFinalized && (
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <RandomizeButton
-              groupId={groupId}
-              participantCount={group.participants.length}
-              isFinalized={group.isFinalized}
-              onRandomize={fetchGroupData}
-            />
+        {/* Randomize button or Resend button */}
+        <div className="card bg-base-100 shadow-md">
+          <div className="card-body">
+            {group.isFinalized ? (
+              <ResendEmailButton
+                groupId={groupId}
+                lastEmailSentAt={group.lastEmailSentAt}
+              />
+            ) : (
+              <RandomizeButton
+                groupId={groupId}
+                participantCount={group.participants.length}
+                isFinalized={group.isFinalized}
+                onRandomize={fetchGroupData}
+              />
+            )}
           </div>
-        )}
+        </div>
       </main>
     </div>
   );

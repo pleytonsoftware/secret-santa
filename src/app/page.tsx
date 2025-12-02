@@ -17,7 +17,7 @@ export default async function Home() {
   const messages = (await import(`@/messages/${locale}.json`)).default;
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-red-50 via-white to-green-50">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-primary/10 via-base-100 to-secondary/10">
       <div className="absolute top-4 right-4">
         <LanguageSwitcher currentLocale={locale} />
       </div>
@@ -25,10 +25,10 @@ export default async function Home() {
       <main className="text-center px-4">
         <div className="mb-8">
           <span className="text-8xl block mb-4">🎅</span>
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-800 mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-base-content mb-4">
             {messages.header.title}
           </h1>
-          <p className="text-lg text-gray-600 max-w-md mx-auto">
+          <p className="text-lg text-base-content/70 max-w-md mx-auto">
             {messages.auth.signInPrompt}
           </p>
         </div>
@@ -42,7 +42,7 @@ export default async function Home() {
         </div>
       </main>
 
-      <footer className="absolute bottom-4 text-gray-400 text-sm">
+      <footer className="absolute bottom-4 text-base-content/50 text-sm">
         © {new Date().getFullYear()} Secret Santa App
       </footer>
     </div>

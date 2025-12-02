@@ -20,10 +20,8 @@ export default async function RootLayout({
   const messages = (await import(`@/messages/${locale}.json`)).default;
 
   return (
-    <html lang={locale}>
-      <body
-        className="font-sans antialiased bg-gray-50 min-h-screen"
-      >
+    <html lang={locale} data-theme="christmas">
+      <body className="font-sans antialiased bg-base-200 min-h-screen">
         <Providers messages={messages} locale={locale}>
           {children}
         </Providers>

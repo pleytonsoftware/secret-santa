@@ -29,17 +29,17 @@ export function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
   };
 
   return (
-    <div className="flex gap-1">
+    <div className="join">
       {locales.map((locale) => (
         <button
           key={locale.code}
           onClick={() => handleLocaleChange(locale.code)}
           disabled={isPending}
-          className={`px-2 py-1 rounded text-sm transition-all ${
+          className={`btn btn-sm join-item ${
             currentLocale === locale.code
-              ? "bg-red-600 text-white"
-              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-          } ${isPending ? "opacity-50 cursor-not-allowed" : ""}`}
+              ? "btn-primary"
+              : "btn-ghost bg-base-100"
+          } ${isPending ? "loading" : ""}`}
           title={locale.label}
         >
           {locale.flag}

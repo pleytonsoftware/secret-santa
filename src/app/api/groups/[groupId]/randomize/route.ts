@@ -5,6 +5,7 @@ import prisma from "@/lib/prisma";
 import { generateAssignments, validateAssignments } from "@/lib/secret-santa";
 import { sendSecretSantaEmail } from "@/lib/email";
 import { cookies } from "next/headers";
+import { locales, type Locale, defaultLocale } from "@/i18n";
 
 interface RouteParams {
   params: Promise<{ groupId: string }>;
@@ -63,11 +64,14 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
 
     // Get locale from cookies
     const cookieStore = await cookies();
-    const locale = cookieStore.get("locale")?.value || "en";
+    const localeCookie = cookieStore.get("locale")?.value;
+    const locale: Locale = locales.includes(localeCookie as Locale) 
+      ? (localeCookie as Locale) 
+      : defaultLocale;
 
     // Create a map of participant IDs to names for email
-    const participantMap = new Map(
-      group.participants.map((p) => [p.id, { name: p.name, email: p.email }])
+    const participantMap = new Map<string, { name: string; email: string }>(
+      group.participants.map((p: { id: string; name: string; email: string }) => [p.id, { name: p.name, email: p.email }])
     );
 
     // Create assignments in database and send emails
@@ -113,10 +117,13 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
       createdAssignments.push(created);
     }
 
-    // Mark group as finalized
+    // Mark group as finalized and set lastEmailSentAt
     await prisma.secretSantaGroup.update({
       where: { id: groupId },
-      data: { isFinalized: true },
+      data: { 
+        isFinalized: true,
+        lastEmailSentAt: new Date(),
+      },
     });
 
     return NextResponse.json({

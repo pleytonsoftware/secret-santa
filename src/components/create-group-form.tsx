@@ -54,58 +54,61 @@ export function CreateGroupForm({ onCancel, onSuccess }: CreateGroupFormProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6">
-        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+    <dialog className="modal modal-open">
+      <div className="modal-box">
+        <h2 className="font-bold text-lg mb-4">
           {t("dashboard.createGroup")}
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t("group.name")} *
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">{t("group.name")} *</span>
             </label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder={t("group.namePlaceholder")}
-              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="input input-bordered w-full"
               disabled={isLoading}
               autoFocus
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t("group.description")}
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">{t("group.description")}</span>
             </label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder={t("group.descriptionPlaceholder")}
               rows={3}
-              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 resize-none"
+              className="textarea textarea-bordered w-full"
               disabled={isLoading}
             />
           </div>
-          <div className="flex gap-3 justify-end">
+          <div className="modal-action">
             <button
               type="button"
               onClick={onCancel}
               disabled={isLoading}
-              className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+              className="btn btn-ghost"
             >
               {t("common.cancel")}
             </button>
             <button
               type="submit"
               disabled={isLoading}
-              className="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="btn btn-primary"
             >
-              {isLoading ? t("common.loading") : t("group.create")}
+              {isLoading ? <span className="loading loading-spinner loading-sm"></span> : t("group.create")}
             </button>
           </div>
         </form>
       </div>
-    </div>
+      <form method="dialog" className="modal-backdrop">
+        <button onClick={onCancel}>close</button>
+      </form>
+    </dialog>
   );
 }

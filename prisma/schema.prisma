@@ -65,16 +65,17 @@ model VerificationToken {
 }
 
 model SecretSantaGroup {
-  id           String        @id @default(cuid())
-  name         String
-  description  String?
-  ownerId      String
-  owner        User          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  participants Participant[]
-  assignments  Assignment[]
-  isFinalized  Boolean       @default(false)
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  id              String        @id @default(cuid())
+  name            String
+  description     String?
+  ownerId         String
+  owner           User          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  participants    Participant[]
+  assignments     Assignment[]
+  isFinalized     Boolean       @default(false)
+  lastEmailSentAt DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
 
   @@map("secret_santa_groups")
 }
