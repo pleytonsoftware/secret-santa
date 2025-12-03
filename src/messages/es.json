@@ -1,105 +1,105 @@
 {
-  "auth": {
-    "login": "Iniciar sesión con Google",
-    "logout": "Cerrar sesión",
-    "welcomeBack": "Bienvenido de nuevo",
-    "signInPrompt": "Inicia sesión para gestionar tus grupos de Amigo Secreto",
-    "loginError": "Error al iniciar sesión. Por favor, inténtalo de nuevo."
-  },
-  "common": {
-    "loading": "Cargando...",
-    "error": "Ha ocurrido un error",
-    "save": "Guardar",
-    "cancel": "Cancelar",
-    "delete": "Eliminar",
-    "edit": "Editar",
-    "add": "Añadir",
-    "remove": "Eliminar",
-    "confirm": "Confirmar",
-    "back": "Volver",
-    "close": "Cerrar",
-    "name": "Nombre",
-    "email": "Correo electrónico",
-    "actions": "Acciones",
-    "required": "Obligatorio"
-  },
-  "header": {
-    "title": "Amigo Secreto",
-    "dashboard": "Panel"
-  },
-  "dashboard": {
-    "title": "Mis Grupos",
-    "subtitle": "Gestiona tus grupos de Amigo Secreto",
-    "createGroup": "Crear Nuevo Grupo",
-    "noGroups": "Aún no tienes ningún grupo de Amigo Secreto.",
-    "noGroupsHint": "¡Crea tu primer grupo para empezar!",
-    "participants": "participantes",
-    "finalized": "Finalizado",
-    "notFinalized": "No Finalizado"
-  },
-  "group": {
-    "title": "Detalles del Grupo",
-    "name": "Nombre del Grupo",
-    "namePlaceholder": "Ingresa el nombre del grupo",
-    "description": "Descripción",
-    "descriptionPlaceholder": "Ingresa una descripción (opcional)",
-    "create": "Crear Grupo",
-    "update": "Actualizar Grupo",
-    "delete": "Eliminar Grupo",
-    "deleteConfirm": "¿Estás seguro de que deseas eliminar este grupo? Esta acción no se puede deshacer.",
-    "participants": "Participantes",
-    "noParticipants": "Aún no hay participantes añadidos.",
-    "addParticipant": "Añadir Participante",
-    "participantName": "Nombre del Participante",
-    "participantEmail": "Correo del Participante",
-    "participantNamePlaceholder": "Ingresa el nombre",
-    "participantEmailPlaceholder": "Ingresa el correo electrónico",
-    "removeParticipant": "Eliminar Participante",
-    "removeParticipantConfirm": "¿Estás seguro de que deseas eliminar a este participante?",
-    "minParticipants": "Necesitas al menos 2 participantes para realizar el sorteo.",
-    "finalized": "Grupo Finalizado",
-    "finalizedDescription": "Las asignaciones se han realizado y los correos se han enviado. Este grupo ya no se puede editar.",
-    "cannotEditFinalized": "Este grupo ha sido finalizado y no se puede editar.",
-    "assigned": "Asignado"
-  },
-  "randomize": {
-    "button": "Sortear y Enviar Correos",
-    "confirm": "¿Estás seguro de que deseas realizar el sorteo y enviar correos a todos los participantes? Esto finalizará el grupo y no podrás hacer cambios.",
-    "success": "¡Asignaciones creadas y correos enviados con éxito!",
-    "error": "Error al crear las asignaciones. Por favor, inténtalo de nuevo.",
-    "sending": "Creando asignaciones y enviando correos...",
-    "tip": "Esta acción es permanente y enviará correos a todos los participantes."
-  },
-  "resend": {
-    "button": "Reenviar Correos",
-    "buttonIndividual": "Reenviar correo a este participante",
-    "buttonIndividualShort": "Reenviar",
-    "confirm": "¿Estás seguro de que deseas reenviar los correos de asignación de Amigo Secreto a todos los participantes?",
-    "confirmIndividual": "¿Estás seguro de que deseas reenviar el correo de asignación de Amigo Secreto a {name}?",
-    "success": "¡Correos reenviados con éxito!",
-    "successIndividual": "¡Correo reenviado con éxito a {name}!",
-    "error": "Error al reenviar los correos. Por favor, inténtalo de nuevo.",
-    "sending": "Reenviando correos...",
-    "waitOneHour": "Por favor, espera 1 hora antes de reenviar los correos.",
-    "waitHours": "Por favor, espera {hours} horas antes de reenviar los correos.",
-    "lastSent": "Último envío:"
-  },
-  "toast": {
-    "groupCreated": "¡Grupo creado con éxito!",
-    "groupUpdated": "¡Grupo actualizado con éxito!",
-    "groupDeleted": "¡Grupo eliminado con éxito!",
-    "participantAdded": "¡Participante añadido con éxito!",
-    "participantRemoved": "¡Participante eliminado con éxito!",
-    "emailsSent": "¡Correos enviados a todos los participantes!",
-    "errorGeneric": "Algo salió mal. Por favor, inténtalo de nuevo.",
-    "errorDuplicateEmail": "Ya existe un participante con este correo en este grupo.",
-    "errorInvalidEmail": "Por favor, ingresa un correo electrónico válido.",
-    "errorMinParticipants": "Necesitas al menos 2 participantes para realizar el sorteo."
-  },
-  "validation": {
-    "nameRequired": "El nombre es obligatorio",
-    "emailRequired": "El correo electrónico es obligatorio",
-    "emailInvalid": "Por favor, ingresa un correo electrónico válido",
-    "groupNameRequired": "El nombre del grupo es obligatorio"
-  }
+    "auth": {
+        "login": "Iniciar sesión con Google",
+        "logout": "Cerrar sesión",
+        "welcomeBack": "Bienvenido de nuevo",
+        "signInPrompt": "Inicia sesión para gestionar tus grupos de Amigo Invisible",
+        "loginError": "Error al iniciar sesión. Por favor, inténtalo de nuevo."
+    },
+    "common": {
+        "loading": "Cargando...",
+        "error": "Ha ocurrido un error",
+        "save": "Guardar",
+        "cancel": "Cancelar",
+        "delete": "Eliminar",
+        "edit": "Editar",
+        "add": "Añadir",
+        "remove": "Eliminar",
+        "confirm": "Confirmar",
+        "back": "Volver",
+        "close": "Cerrar",
+        "name": "Nombre",
+        "email": "Correo electrónico",
+        "actions": "Acciones",
+        "required": "Obligatorio"
+    },
+    "header": {
+        "title": "Amigo Invisible",
+        "dashboard": "Panel"
+    },
+    "dashboard": {
+        "title": "Mis Grupos",
+        "subtitle": "Gestiona tus grupos de Amigo Invisible",
+        "createGroup": "Crear Nuevo Grupo",
+        "noGroups": "Aún no tienes ningún grupo de Amigo Invisible.",
+        "noGroupsHint": "¡Crea tu primer grupo para empezar!",
+        "participants": "participantes",
+        "finalized": "Finalizado",
+        "notFinalized": "No Finalizado"
+    },
+    "group": {
+        "title": "Detalles del Grupo",
+        "name": "Nombre del Grupo",
+        "namePlaceholder": "Ingresa el nombre del grupo",
+        "description": "Descripción",
+        "descriptionPlaceholder": "Ingresa una descripción (opcional)",
+        "create": "Crear Grupo",
+        "update": "Actualizar Grupo",
+        "delete": "Eliminar Grupo",
+        "deleteConfirm": "¿Estás seguro de que deseas eliminar este grupo? Esta acción no se puede deshacer.",
+        "participants": "Participantes",
+        "noParticipants": "Aún no hay participantes añadidos.",
+        "addParticipant": "Añadir Participante",
+        "participantName": "Nombre del Participante",
+        "participantEmail": "Correo del Participante",
+        "participantNamePlaceholder": "Ingresa el nombre",
+        "participantEmailPlaceholder": "Ingresa el correo electrónico",
+        "removeParticipant": "Eliminar Participante",
+        "removeParticipantConfirm": "¿Estás seguro de que deseas eliminar a este participante?",
+        "minParticipants": "Necesitas al menos 2 participantes para realizar el sorteo.",
+        "finalized": "Grupo Finalizado",
+        "finalizedDescription": "Las asignaciones se han realizado y los correos se han enviado. Este grupo ya no se puede editar.",
+        "cannotEditFinalized": "Este grupo ha sido finalizado y no se puede editar.",
+        "assigned": "Asignado"
+    },
+    "randomize": {
+        "button": "Sortear y Enviar Correos",
+        "confirm": "¿Estás seguro de que deseas realizar el sorteo y enviar correos a todos los participantes? Esto finalizará el grupo y no podrás hacer cambios.",
+        "success": "¡Asignaciones creadas y correos enviados con éxito!",
+        "error": "Error al crear las asignaciones. Por favor, inténtalo de nuevo.",
+        "sending": "Creando asignaciones y enviando correos...",
+        "tip": "Esta acción es permanente y enviará correos a todos los participantes."
+    },
+    "resend": {
+        "button": "Reenviar Correos",
+        "buttonIndividual": "Reenviar correo a este participante",
+        "buttonIndividualShort": "Reenviar",
+        "confirm": "¿Estás seguro de que deseas reenviar los correos de asignación de Amigo Invisible a todos los participantes?",
+        "confirmIndividual": "¿Estás seguro de que deseas reenviar el correo de asignación de Amigo Invisible a {name}?",
+        "success": "¡Correos reenviados con éxito!",
+        "successIndividual": "¡Correo reenviado con éxito a {name}!",
+        "error": "Error al reenviar los correos. Por favor, inténtalo de nuevo.",
+        "sending": "Reenviando correos...",
+        "waitOneHour": "Por favor, espera 1 hora antes de reenviar los correos.",
+        "waitHours": "Por favor, espera {hours} horas antes de reenviar los correos.",
+        "lastSent": "Último envío:"
+    },
+    "toast": {
+        "groupCreated": "¡Grupo creado con éxito!",
+        "groupUpdated": "¡Grupo actualizado con éxito!",
+        "groupDeleted": "¡Grupo eliminado con éxito!",
+        "participantAdded": "¡Participante añadido con éxito!",
+        "participantRemoved": "¡Participante eliminado con éxito!",
+        "emailsSent": "¡Correos enviados a todos los participantes!",
+        "errorGeneric": "Algo salió mal. Por favor, inténtalo de nuevo.",
+        "errorDuplicateEmail": "Ya existe un participante con este correo en este grupo.",
+        "errorInvalidEmail": "Por favor, ingresa un correo electrónico válido.",
+        "errorMinParticipants": "Necesitas al menos 2 participantes para realizar el sorteo."
+    },
+    "validation": {
+        "nameRequired": "El nombre es obligatorio",
+        "emailRequired": "El correo electrónico es obligatorio",
+        "emailInvalid": "Por favor, ingresa un correo electrónico válido",
+        "groupNameRequired": "El nombre del grupo es obligatorio"
+    }
 }
