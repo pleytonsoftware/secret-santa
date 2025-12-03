@@ -1,232 +1,263 @@
 @import "tailwindcss";
-@plugin "daisyui" {
-  themes: christmas --default;
+@plugin "daisyui";
+
+@plugin "daisyui/theme" {
+    name: "christmas";
+    default: true;
+    prefersdark: false;
+    color-scheme: light;
+
+    /* Base colors */
+    --color-base-100: oklch(100% 0 0); /* #ffffff - Clean White */
+    --color-base-200: oklch(98% 0.01 240); /* Light gray */
+    --color-base-300: oklch(96% 0.01 240); /* Slightly darker */
+    --color-base-content: oklch(25% 0.02 240); /* Dark text on base */
+
+    /* Primary - Santa Red */
+    --color-primary: oklch(53% 0.22 20); /* #c81e1e - Santa Red */
+    --color-primary-content: oklch(100% 0 0); /* White text on primary */
+
+    /* Secondary - Forest Green */
+    --color-secondary: oklch(30% 0.12 150); /* #14532d - Forest Green */
+    --color-secondary-content: oklch(100% 0 0); /* White text on secondary */
+
+    /* Accent - Gold */
+    --color-accent: oklch(75% 0.15 85); /* #eab308 - Gold */
+    --color-accent-content: oklch(20% 0.02 85); /* Dark text on accent */
+
+    /* Neutral - Dark Slate */
+    --color-neutral: oklch(30% 0.02 240); /* #1f2937 - Dark Slate */
+    --color-neutral-content: oklch(100% 0 0); /* White text on neutral */
+
+    /* Info */
+    --color-info: oklch(70% 0.15 220); /* #38bdf8 - Info */
+    --color-info-content: oklch(100% 0 0);
+
+    /* Success */
+    --color-success: oklch(70% 0.15 145); /* #4ade80 - Success */
+    --color-success-content: oklch(20% 0.02 145);
+
+    /* Warning */
+    --color-warning: oklch(80% 0.18 90); /* #facc15 - Warning */
+    --color-warning-content: oklch(20% 0.02 90);
+
+    /* Error */
+    --color-error: oklch(65% 0.22 25); /* #ef4444 - Error */
+    --color-error-content: oklch(100% 0 0);
+
+    /* Border radius */
+    --radius-selector: 1rem;
+    --radius-field: 0.5rem;
+    --radius-box: 1rem;
+
+    /* Base sizes */
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+
+    /* Border size */
+    --border: 1px;
+
+    /* Effects */
+    --depth: 1;
+    --noise: 0;
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@layer base {
-  [data-theme="christmas"] {
-    --p: 0 79% 45%;          /* #c81e1e - Santa Red */
-    --pf: 0 79% 35%;         /* Darker Santa Red */
-    --pc: 0 0% 100%;         /* White text on primary */
-    
-    --s: 141 69% 17%;        /* #14532d - Forest Green */
-    --sf: 141 69% 12%;       /* Darker Forest Green */
-    --sc: 0 0% 100%;         /* White text on secondary */
-    
-    --a: 45 93% 47%;         /* #eab308 - Gold */
-    --af: 45 93% 37%;        /* Darker Gold */
-    --ac: 0 0% 10%;          /* Dark text on accent */
-    
-    --n: 215 28% 17%;        /* #1f2937 - Dark Slate */
-    --nf: 215 28% 12%;       /* Darker Slate */
-    --nc: 0 0% 100%;         /* White text on neutral */
-    
-    --b1: 0 0% 100%;         /* #ffffff - Clean White */
-    --b2: 210 40% 98%;       /* Light gray */
-    --b3: 210 40% 96%;       /* Slightly darker */
-    --bc: 215 28% 17%;       /* Dark text on base */
-    
-    --in: 199 89% 48%;       /* #38bdf8 - Info */
-    --inc: 0 0% 100%;
-    
-    --su: 142 69% 58%;       /* #4ade80 - Success */
-    --suc: 0 0% 10%;
-    
-    --wa: 48 96% 53%;        /* #facc15 - Warning */
-    --wac: 0 0% 10%;
-    
-    --er: 0 84% 60%;         /* #ef4444 - Error */
-    --erc: 0 0% 100%;
-    
-    --rounded-box: 1rem;
-    --rounded-btn: 0.5rem;
-    --rounded-badge: 1.9rem;
-    --animation-btn: 0.25s;
-    --animation-input: .2s;
-    --btn-focus-scale: 0.95;
-    --border-btn: 1px;
-    --tab-border: 1px;
-    --tab-radius: 0.5rem;
-  }
-}
-
-html[data-theme="christmas"] {
-  color-scheme: light;
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
 }
 
 /* Snowfall Animation */
 @keyframes snowfall {
-  0% {
-    transform: translateY(-10vh) translateX(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh) translateX(20px);
-    opacity: 0.3;
-  }
+    0% {
+        transform: translateY(-10vh) translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) translateX(20px);
+        opacity: 0.3;
+    }
 }
 
 @keyframes snowfall-reverse {
-  0% {
-    transform: translateY(-10vh) translateX(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh) translateX(-20px);
-    opacity: 0.3;
-  }
+    0% {
+        transform: translateY(-10vh) translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) translateX(-20px);
+        opacity: 0.3;
+    }
 }
 
 .snowflake {
-  position: fixed;
-  top: -10vh;
-  color: white;
-  font-size: 1rem;
-  pointer-events: none;
-  z-index: 1;
-  animation: snowfall linear infinite;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    position: fixed;
+    top: -10vh;
+    color: white;
+    font-size: 1rem;
+    pointer-events: none;
+    z-index: 1;
+    animation: snowfall linear infinite;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
 }
 
 .snowflake:nth-child(odd) {
-  animation-name: snowfall-reverse;
+    animation-name: snowfall-reverse;
 }
 
 /* Floating Animation */
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-20px) rotate(5deg);
-  }
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(5deg);
+    }
 }
 
 @keyframes float-delayed {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-15px) rotate(-5deg);
-  }
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-15px) rotate(-5deg);
+    }
 }
 
 .animate-float {
-  animation: float 3s ease-in-out infinite;
+    animation: float 3s ease-in-out infinite;
 }
 
 .animate-float-delayed {
-  animation: float-delayed 3.5s ease-in-out infinite;
-  animation-delay: 0.5s;
+    animation: float-delayed 3.5s ease-in-out infinite;
+    animation-delay: 0.5s;
 }
 
 /* Pulse Glow Animation */
 @keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(200, 30, 30, 0.3), 0 0 40px rgba(20, 83, 45, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(200, 30, 30, 0.5), 0 0 60px rgba(20, 83, 45, 0.3);
-  }
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(200, 30, 30, 0.3),
+            0 0 40px rgba(20, 83, 45, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(200, 30, 30, 0.5),
+            0 0 60px rgba(20, 83, 45, 0.3);
+    }
 }
 
 .animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
+    animation: pulse-glow 2s ease-in-out infinite;
 }
 
 /* Shimmer Effect */
 @keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
 }
 
 .shimmer-border {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(234, 179, 8, 0.4) 25%,
-    rgba(234, 179, 8, 0.8) 50%,
-    rgba(234, 179, 8, 0.4) 75%,
-    transparent 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 3s linear infinite;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(234, 179, 8, 0.4) 25%,
+        rgba(234, 179, 8, 0.8) 50%,
+        rgba(234, 179, 8, 0.4) 75%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
 }
 
 /* Bounce Animation */
 @keyframes bounce-subtle {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 .animate-bounce-subtle {
-  animation: bounce-subtle 2s ease-in-out infinite;
+    animation: bounce-subtle 2s ease-in-out infinite;
 }
 
 /* Sparkle Effect */
 @keyframes sparkle {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.5;
-    transform: scale(1.2);
-  }
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
 }
 
 .animate-sparkle {
-  animation: sparkle 1.5s ease-in-out infinite;
+    animation: sparkle 1.5s ease-in-out infinite;
 }
 
 /* Card Hover Effects */
 .christmas-card {
-  transition: all 0.3s ease;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.95) 100%);
-  border: 2px solid transparent;
+    transition: all 0.3s ease;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(255, 255, 255, 0.95) 100%
+    );
+    border: 2px solid transparent;
 }
 
 .christmas-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  border-color: rgba(234, 179, 8, 0.5);
-  box-shadow: 
-    0 20px 40px rgba(200, 30, 30, 0.15),
-    0 10px 20px rgba(20, 83, 45, 0.1),
-    0 0 0 1px rgba(234, 179, 8, 0.3);
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(234, 179, 8, 0.5);
+    box-shadow: 0 20px 40px rgba(200, 30, 30, 0.15),
+        0 10px 20px rgba(20, 83, 45, 0.1), 0 0 0 1px rgba(234, 179, 8, 0.3);
 }
 
 /* Gradient Text */
 .gradient-text {
-  background: linear-gradient(135deg, #c81e1e 0%, #14532d 50%, #eab308 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+    background: linear-gradient(135deg, #c81e1e 0%, #14532d 50%, #eab308 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 /* Festive Background Pattern */
 .festive-bg {
-  background-image: 
-    radial-gradient(circle at 20% 80%, rgba(200, 30, 30, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(20, 83, 45, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(234, 179, 8, 0.03) 0%, transparent 50%);
+    background-image: radial-gradient(
+            circle at 20% 80%,
+            rgba(200, 30, 30, 0.05) 0%,
+            transparent 50%
+        ),
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(20, 83, 45, 0.05) 0%,
+            transparent 50%
+        ),
+        radial-gradient(
+            circle at 40% 40%,
+            rgba(234, 179, 8, 0.03) 0%,
+            transparent 50%
+        );
 }
 
 /* Snow Background */
 .snow-bg {
-  background: 
-    linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 100%),
-    linear-gradient(135deg, #fef3f3 0%, #f0fdf4 50%, #fefce8 100%);
+    background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.8) 100%
+        ),
+        linear-gradient(135deg, #fef3f3 0%, #f0fdf4 50%, #fefce8 100%);
 }
