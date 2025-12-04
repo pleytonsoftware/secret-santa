@@ -26,6 +26,7 @@ import IncomingEnvelopeIcon from "@/icons/incoming-envelope.svg";
 import PlusIcon from "@/icons/plus.svg";
 import SilhouetteIcon from "@/icons/silhouette.svg";
 import DiceIcon from "@/icons/dice.svg";
+import { Footer } from "@/components/footer";
 
 interface Participant {
     id: string;
@@ -47,6 +48,11 @@ interface Group {
     lastEmailSentAt: string | null;
     participants: Participant[];
     assignments: Assignment[];
+    spendingLimit?: string;
+    theme?: string;
+    exchangeDate?: string;
+    location?: string;
+    additionalRules?: string;
 }
 
 interface GroupDetailClientProps {
@@ -63,6 +69,11 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
     const [isEditing, setIsEditing] = useState(false);
     const [editName, setEditName] = useState("");
     const [editDescription, setEditDescription] = useState("");
+    const [editSpendingLimit, setEditSpendingLimit] = useState("");
+    const [editTheme, setEditTheme] = useState("");
+    const [editExchangeDate, setEditExchangeDate] = useState("");
+    const [editLocation, setEditLocation] = useState("");
+    const [editAdditionalRules, setEditAdditionalRules] = useState("");
     const [isSaving, setIsSaving] = useState(false);
 
     // Shared function to handle API errors and display toast messages
@@ -80,6 +91,15 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
                 setGroup(data);
                 setEditName(data.name);
                 setEditDescription(data.description || "");
+                setEditSpendingLimit(data.spendingLimit || "");
+                setEditTheme(data.theme || "");
+                setEditExchangeDate(
+                    data.exchangeDate
+                        ? new Date(data.exchangeDate).toISOString().slice(0, 10)
+                        : "",
+                );
+                setEditLocation(data.location || "");
+                setEditAdditionalRules(data.additionalRules || "");
             } else if (response.status === 404) {
                 toast.error("Group not found");
                 router.push("/dashboard");
@@ -134,6 +154,11 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
                 body: JSON.stringify({
                     name: editName.trim(),
                     description: editDescription.trim() || null,
+                    spendingLimit: editSpendingLimit.trim() || null,
+                    theme: editTheme.trim() || null,
+                    exchangeDate: editExchangeDate || null,
+                    location: editLocation.trim() || null,
+                    additionalRules: editAdditionalRules.trim() || null,
                 }),
             });
 
@@ -285,6 +310,103 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
                                         disabled={isSaving}
                                     />
                                 </div>
+                                <div className="divider">
+                                    {t("group.settings")}
+                                </div>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text font-semibold">
+                                            {t("group.spendingLimit")}
+                                        </span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        value={editSpendingLimit}
+                                        onChange={(e) =>
+                                            setEditSpendingLimit(e.target.value)
+                                        }
+                                        className="input input-bordered w-full"
+                                        disabled={isSaving}
+                                        placeholder={t(
+                                            "group.spendingLimitPlaceholder",
+                                        )}
+                                    />
+                                </div>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text font-semibold">
+                                            {t("group.theme")}
+                                        </span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        value={editTheme}
+                                        onChange={(e) =>
+                                            setEditTheme(e.target.value)
+                                        }
+                                        className="input input-bordered w-full"
+                                        disabled={isSaving}
+                                        placeholder={t(
+                                            "group.themePlaceholder",
+                                        )}
+                                    />
+                                </div>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text font-semibold">
+                                            {t("group.exchangeDate")}
+                                        </span>
+                                    </label>
+                                    <input
+                                        type="date"
+                                        value={editExchangeDate}
+                                        onChange={(e) =>
+                                            setEditExchangeDate(e.target.value)
+                                        }
+                                        className="input input-bordered w-full"
+                                        disabled={isSaving}
+                                    />
+                                </div>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text font-semibold">
+                                            {t("group.location")}
+                                        </span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        value={editLocation}
+                                        onChange={(e) =>
+                                            setEditLocation(e.target.value)
+                                        }
+                                        className="input input-bordered w-full"
+                                        disabled={isSaving}
+                                        placeholder={t(
+                                            "group.locationPlaceholder",
+                                        )}
+                                    />
+                                </div>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text font-semibold">
+                                            {t("group.additionalRules")}
+                                        </span>
+                                    </label>
+                                    <textarea
+                                        value={editAdditionalRules}
+                                        onChange={(e) =>
+                                            setEditAdditionalRules(
+                                                e.target.value,
+                                            )
+                                        }
+                                        rows={2}
+                                        className="textarea textarea-bordered w-full"
+                                        disabled={isSaving}
+                                        placeholder={t(
+                                            "group.additionalRulesPlaceholder",
+                                        )}
+                                    />
+                                </div>
                                 <div className="flex gap-3 justify-end pt-2">
                                     <button
                                         type="button"
@@ -293,6 +415,39 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
                                             setEditName(group.name);
                                             setEditDescription(
                                                 group.description || "",
+                                            );
+                                            setEditSpendingLimit(
+                                                group.spendingLimit
+                                                    ? String(
+                                                          group.spendingLimit,
+                                                      )
+                                                    : "",
+                                            );
+                                            setEditTheme(
+                                                group.theme
+                                                    ? String(group.theme)
+                                                    : "",
+                                            );
+                                            setEditExchangeDate(
+                                                group.exchangeDate
+                                                    ? new Date(
+                                                          group.exchangeDate,
+                                                      )
+                                                          .toISOString()
+                                                          .slice(0, 10)
+                                                    : "",
+                                            );
+                                            setEditLocation(
+                                                group.location
+                                                    ? String(group.location)
+                                                    : "",
+                                            );
+                                            setEditAdditionalRules(
+                                                group.additionalRules
+                                                    ? String(
+                                                          group.additionalRules,
+                                                      )
+                                                    : "",
                                             );
                                         }}
                                         disabled={isSaving}
@@ -342,6 +497,73 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
                                             <p className="text-base-content/70 mt-2">
                                                 {group.description}
                                             </p>
+                                        )}
+                                        {/* Group Settings */}
+                                        {(group.spendingLimit ||
+                                            group.theme ||
+                                            group.exchangeDate ||
+                                            group.location ||
+                                            group.additionalRules) && (
+                                            <div className="mt-4 space-y-2">
+                                                <h3 className="font-semibold text-base-content/80 mb-2">
+                                                    {t("group.settings")}
+                                                </h3>
+                                                <div className="grid flex-1 gap-2">
+                                                    {group.spendingLimit && (
+                                                        <GroupInfoDetail
+                                                            label={t(
+                                                                "group.spendingLimit",
+                                                            )}
+                                                            value={group.spendingLimit?.toString()}
+                                                        />
+                                                    )}
+                                                    {group.theme && (
+                                                        <GroupInfoDetail
+                                                            label={t(
+                                                                "group.theme",
+                                                            )}
+                                                            value={group.theme}
+                                                        />
+                                                    )}
+                                                    {group.exchangeDate && (
+                                                        <GroupInfoDetail
+                                                            label={t(
+                                                                "group.exchangeDate",
+                                                            )}
+                                                            value={new Date(
+                                                                group.exchangeDate,
+                                                            ).toLocaleDateString(
+                                                                locale,
+                                                                {
+                                                                    year: "numeric",
+                                                                    month: "long",
+                                                                    day: "numeric",
+                                                                },
+                                                            )}
+                                                        />
+                                                    )}
+                                                    {group.location && (
+                                                        <GroupInfoDetail
+                                                            label={t(
+                                                                "group.location",
+                                                            )}
+                                                            value={
+                                                                group.location
+                                                            }
+                                                        />
+                                                    )}
+                                                    {group.additionalRules && (
+                                                        <GroupInfoDetail
+                                                            label={t(
+                                                                "group.additionalRules",
+                                                            )}
+                                                            value={
+                                                                group.additionalRules
+                                                            }
+                                                        />
+                                                    )}
+                                                </div>
+                                            </div>
                                         )}
                                         {/* Status badge */}
                                         <div className="mt-3">
@@ -504,21 +726,7 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
                         )}
                     </div>
                 </div>
-                <footer className="relative py-6 text-center z-10">
-                    <div className="flex items-center justify-center gap-2 text-base-content/60 text-sm">
-                        <span>🎄</span>
-                        <span>
-                            © {new Date().getFullYear()} {t("appNameBy")}{" "}
-                            <a
-                                className="btn btn-link p-0 border-0 h-auto"
-                                href="https://pleyt.dev"
-                            >
-                                @pleyt.dev
-                            </a>
-                        </span>
-                        <span>🎄</span>
-                    </div>
-                </footer>
+                <Footer />
 
                 {/* Bottom decorative elements */}
                 {/* <div className="mt-12 flex justify-center gap-4 text-2xl opacity-30">
@@ -532,3 +740,14 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
         </div>
     );
 }
+
+type GroupInfoDetailProps = {
+    label: string;
+    value: string;
+};
+const GroupInfoDetail = ({ label, value }: GroupInfoDetailProps) => (
+    <div className="flex justify-between items-center bg-base-200 rounded-lg px-4 py-2 gap-2">
+        <span className="text-sm text-base-content/70">{label}:</span>
+        <span className="font-semibold">{value}</span>
+    </div>
+);

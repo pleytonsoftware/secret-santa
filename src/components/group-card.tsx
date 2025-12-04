@@ -35,7 +35,7 @@ export function GroupCard({
 
     return (
         <Link href={`/dashboard/groups/${id}`}>
-            <div className="christmas-card card bg-base-100 shadow-lg cursor-pointer overflow-hidden group">
+            <div className="christmas-card card bg-base-100 h-full shadow-lg cursor-pointer overflow-hidden group">
                 {/* Top decorative border */}
                 <div
                     className={`h-1 w-full ${
@@ -97,28 +97,30 @@ export function GroupCard({
                         </p>
                     )}
 
-                    <div className="flex items-center justify-between mt-4">
-                        <div className="flex items-center gap-2 text-base-content/70 text-sm">
-                            <Icon Render={SilhouetteIcon} size="xs" />
-                            <span className="font-medium">
-                                {participantCount} {t("participants")}
-                            </span>
+                    <div className="mt-auto">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2 text-base-content/70 text-sm">
+                                <Icon Render={SilhouetteIcon} size="xs" />
+                                <span className="font-medium">
+                                    {participantCount} {t("participants")}
+                                </span>
+                            </div>
+
+                            {/* Arrow indicator */}
+                            <div className="text-primary opacity-0 group-hover:opacity-100 transform -translate-x-2.5 group-hover:translate-x-0 transition-all duration-300">
+                                →
+                            </div>
                         </div>
 
-                        {/* Arrow indicator */}
-                        <div className="text-primary opacity-0 group-hover:opacity-100 transform -translate-x-2.5 group-hover:translate-x-0 transition-all duration-300">
-                            →
+                        {/* Creation date */}
+                        <div className="flex items-center gap-2 text-xs text-base-content/50">
+                            <Icon Render={CalendarIcon} size="xs" />
+                            {new Date(createdAt).toLocaleDateString(locale, {
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                            })}
                         </div>
-                    </div>
-
-                    {/* Creation date */}
-                    <div className="flex items-center gap-2 text-xs text-base-content/50">
-                        <Icon Render={CalendarIcon} size="xs" />
-                        {new Date(createdAt).toLocaleDateString(locale, {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                        })}
                     </div>
 
                     {/* Participant preview dots */}

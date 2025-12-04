@@ -68,6 +68,11 @@ model SecretSantaGroup {
   id              String        @id @default(cuid())
   name            String
   description     String?
+  spendingLimit   String?
+  theme           String?
+  exchangeDate    DateTime?
+  location        String?
+  additionalRules String?
   ownerId         String
   owner           User          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   participants    Participant[]
@@ -88,6 +93,7 @@ model Participant {
   group         SecretSantaGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
   givingTo      Assignment[]     @relation("giver")
   receivingFrom Assignment[]     @relation("receiver")
+  wishlistItems WishlistItem[]
   createdAt     DateTime         @default(now())
 
   @@unique([groupId, email])
@@ -104,8 +110,24 @@ model Assignment {
   receiver        Participant      @relation("receiver", fields: [receiverId], references: [id], onDelete: Cascade)
   emailSent       Boolean          @default(false)
   lastEmailSentAt DateTime?
+  viewToken       String?          @unique @default(cuid())
   createdAt       DateTime         @default(now())
 
   @@unique([groupId, giverId])
   @@map("assignments")
+}
+
+model WishlistItem {
+  id            String      @id @default(cuid())
+  participantId String
+  participant   Participant @relation(fields: [participantId], references: [id], onDelete: Cascade)
+  name          String
+  description   String?
+  link          String?
+  price         String?
+  priority      Int         @default(0) // 0 = normal, 1 = preferred, 2 = must-have
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@map("wishlist_items")
 }

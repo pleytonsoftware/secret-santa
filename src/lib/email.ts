@@ -17,6 +17,7 @@ interface SendSecretSantaEmailParams {
     receiverName: string;
     groupName: string;
     locale: Locale;
+    viewToken?: string;
 }
 
 const emailTemplates = {
@@ -31,6 +32,9 @@ const emailTemplates = {
         reminder: "Remember: Keep it a secret! 🤫",
         closing: "Have fun shopping and Happy Holidays!",
         footer: "Secret Santa App by",
+        viewOnline: "View Your Assignment Online",
+        viewOnlineText:
+            "Click the button below to view your assignment anytime:",
     },
     es: {
         appName: "Amigo Invisible",
@@ -43,6 +47,9 @@ const emailTemplates = {
         reminder: "Recuerda: ¡Mantenlo en secreto! 🤫",
         closing: "¡Disfruta comprando y Felices Fiestas!",
         footer: "Aplicación de Amigo Invisible de",
+        viewOnline: "Ver Tu Asignación en Línea",
+        viewOnlineText:
+            "Haz clic en el botón para ver tu asignación en cualquier momento:",
     },
 };
 
@@ -52,8 +59,13 @@ export async function sendSecretSantaEmail({
     receiverName,
     groupName,
     locale,
+    viewToken,
 }: SendSecretSantaEmailParams): Promise<{ success: boolean; error?: string }> {
     const template = emailTemplates[locale] || emailTemplates.en;
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    const viewUrl = viewToken
+        ? `${baseUrl}/${locale}/assignment/${viewToken}`
+        : undefined;
 
     const htmlContent = `
     <!DOCTYPE html>
@@ -118,6 +130,24 @@ export async function sendSecretSantaEmail({
                     <p style="color: #4b5563; font-size: 16px; text-align: center; margin: 30px 0 0 0; line-height: 1.6;">
                       ${template.closing}
                     </p>
+                    
+                    <!-- View Online Button -->
+                    ${
+                        viewUrl
+                            ? `<table width="100%" cellpadding="0" cellspacing="0" style="margin: 30px 0 0 0;">
+                      <tr>
+                        <td align="center">
+                          <p style="color: #6b7280; font-size: 14px; margin: 0 0 15px 0;">
+                            ${template.viewOnlineText}
+                          </p>
+                          <a href="${viewUrl}" style="display: inline-block; background: linear-gradient(135deg, #c81e1e 0%, #14532d 100%); color: white; padding: 14px 32px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 12px rgba(200, 30, 30, 0.3);">
+                            🎁 ${template.viewOnline}
+                          </a>
+                        </td>
+                      </tr>
+                    </table>`
+                            : ""
+                    }
                   </td>
                 </tr>
                 
