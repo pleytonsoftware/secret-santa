@@ -8,9 +8,9 @@ import "./globals.css";
 export async function generateMetadata(): Promise<Metadata> {
     const cookieStore = await cookies();
     const localeCookie = cookieStore.get("locale")?.value;
-    const locale = locales.includes((localeCookie as Locale) || "en")
-        ? localeCookie!
-        : "en";
+    const locale: Locale = (
+        locales.includes(localeCookie as Locale) ? localeCookie : "en"
+    ) as Locale;
 
     const messages = (await import(`@/messages/${locale}.json`)).default;
     const seo = messages.seo.home;
@@ -109,9 +109,9 @@ export default async function RootLayout({
 }>) {
     const cookieStore = await cookies();
     const localeCookie = cookieStore.get("locale")?.value;
-    const locale = locales.includes((localeCookie as Locale) || "en")
-        ? localeCookie!
-        : "en";
+    const locale: Locale = (
+        locales.includes(localeCookie as Locale) ? localeCookie : "en"
+    ) as Locale;
 
     const messages = (await import(`@/messages/${locale}.json`)).default;
 
