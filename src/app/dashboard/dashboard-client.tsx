@@ -7,12 +7,20 @@ import { Header } from "@/components/header";
 import { GroupCard } from "@/components/group-card";
 import { CreateGroupForm } from "@/components/create-group-form";
 import { LoadingSpinner } from "@/components/loading-spinner";
+import { Icon } from "@/components/icon";
+import TreeIcon from "@/icons/tree.svg";
+import GiftIcon from "@/icons/gift.svg";
+import SantaIcon from "@/icons/santa-claus.svg";
+import SilhouetteIcon from "@/icons/silhouette.svg";
+import CheckIcon from "@/icons/check.svg";
+import HourglassIcon from "@/icons/hourglass.svg";
 
 interface Group {
     id: string;
     name: string;
     description: string | null;
     isFinalized: boolean;
+    createdAt: string;
     _count: {
         participants: number;
     };
@@ -55,9 +63,7 @@ export function DashboardClient({ locale }: DashboardClientProps) {
                 <div className="text-center">
                     <LoadingSpinner size="lg" />
                     <p className="mt-4 text-base-content/60 animate-pulse">
-                        {locale === "es"
-                            ? "Cargando la magia navideña..."
-                            : "Loading Christmas magic..."}
+                        {t("dashboard.loadingMagic")}
                     </p>
                 </div>
             </div>
@@ -77,8 +83,8 @@ export function DashboardClient({ locale }: DashboardClientProps) {
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
                 {/* Hero Section */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10 gap-6">
-                    <div className="flex items-center gap-4">
-                        <div className="text-5xl animate-float">🎄</div>
+                    <div className="flex items-start gap-4">
+                        <Icon Render={TreeIcon} size="lg" />
                         <div>
                             <h1 className="text-4xl font-extrabold gradient-text">
                                 {t("dashboard.title")}
@@ -90,11 +96,9 @@ export function DashboardClient({ locale }: DashboardClientProps) {
                     </div>
                     <button
                         onClick={() => setShowCreateForm(true)}
-                        className="btn btn-primary btn-lg gap-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group"
+                        className="btn btn-secondary btn-lg gap-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group"
                     >
-                        <span className="text-2xl group-hover:animate-bounce">
-                            🎁
-                        </span>
+                        <Icon Render={GiftIcon} size="sm" />
                         {t("dashboard.createGroup")}
                     </button>
                 </div>
@@ -103,48 +107,50 @@ export function DashboardClient({ locale }: DashboardClientProps) {
                 {groups.length > 0 && (
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
                         <div className="bg-base-100/80 backdrop-blur-sm rounded-xl p-4 shadow-md border border-primary/10 christmas-card">
-                            <div className="text-3xl mb-2">🎅</div>
+                            <div className="text-3xl mb-2">
+                                <Icon Render={SantaIcon} size="lg" />
+                            </div>
                             <div className="text-2xl font-bold text-primary">
                                 {groups.length}
                             </div>
                             <div className="text-sm text-base-content/60">
-                                {locale === "es"
-                                    ? "Grupos Totales"
-                                    : "Total Groups"}
+                                {t("dashboard.totalGroups")}
                             </div>
                         </div>
                         <div className="bg-base-100/80 backdrop-blur-sm rounded-xl p-4 shadow-md border border-secondary/10 christmas-card">
-                            <div className="text-3xl mb-2">👥</div>
+                            <div className="text-3xl mb-2">
+                                <Icon Render={SilhouetteIcon} size="lg" />
+                            </div>
                             <div className="text-2xl font-bold text-secondary">
                                 {groups.reduce(
                                     (acc, g) => acc + g._count.participants,
                                     0,
                                 )}
                             </div>
-                            <div className="text-sm text-base-content/60">
-                                {locale === "es"
-                                    ? "Participantes"
-                                    : "Participants"}
+                            <div className="text-sm text-base-content/60 capitalize">
+                                {t("dashboard.participants")}
                             </div>
                         </div>
                         <div className="bg-base-100/80 backdrop-blur-sm rounded-xl p-4 shadow-md border border-accent/10 christmas-card">
-                            <div className="text-3xl mb-2">✅</div>
+                            <div className="text-3xl mb-2">
+                                <Icon Render={CheckIcon} size="lg" />
+                            </div>
                             <div className="text-2xl font-bold text-accent">
                                 {groups.filter((g) => g.isFinalized).length}
                             </div>
                             <div className="text-sm text-base-content/60">
-                                {locale === "es" ? "Finalizados" : "Finalized"}
+                                {t("dashboard.finalized")}
                             </div>
                         </div>
                         <div className="bg-base-100/80 backdrop-blur-sm rounded-xl p-4 shadow-md border border-info/10 christmas-card">
-                            <div className="text-3xl mb-2">⏳</div>
+                            <div className="text-3xl mb-2">
+                                <Icon Render={HourglassIcon} size="lg" />
+                            </div>
                             <div className="text-2xl font-bold text-info">
                                 {groups.filter((g) => !g.isFinalized).length}
                             </div>
                             <div className="text-sm text-base-content/60">
-                                {locale === "es"
-                                    ? "En Progreso"
-                                    : "In Progress"}
+                                {t("dashboard.inProgress")}
                             </div>
                         </div>
                     </div>
@@ -190,7 +196,7 @@ export function DashboardClient({ locale }: DashboardClientProps) {
                                 onClick={() => setShowCreateForm(true)}
                                 className="btn btn-primary btn-lg gap-3 animate-pulse-glow"
                             >
-                                <span className="text-2xl">🎁</span>
+                                <Icon Render={GiftIcon} size="sm" />
                                 {t("dashboard.createGroup")}
                             </button>
 
@@ -211,9 +217,16 @@ export function DashboardClient({ locale }: DashboardClientProps) {
                     <>
                         {/* Section Title */}
                         <div className="flex items-center gap-3 mb-6">
-                            <span className="text-2xl">🎁</span>
+                            <div className="flex items-end">
+                                <Icon Render={TreeIcon} size="sm" />
+                                <Icon
+                                    Render={GiftIcon}
+                                    size="sm"
+                                    className="size-2.5!"
+                                />
+                            </div>
                             <h2 className="text-xl font-semibold text-base-content">
-                                {locale === "es" ? "Tus Grupos" : "Your Groups"}
+                                {t("dashboard.yourGroups")}
                             </h2>
                             <div className="flex-1 h-px bg-linear-to-tl from-primary/20 via-secondary/20 to-transparent" />
                         </div>
@@ -236,21 +249,14 @@ export function DashboardClient({ locale }: DashboardClientProps) {
                                             group._count.participants
                                         }
                                         isFinalized={group.isFinalized}
+                                        createdAt={group.createdAt}
+                                        locale={locale}
                                     />
                                 </div>
                             ))}
                         </div>
                     </>
                 )}
-
-                {/* Bottom decorative elements */}
-                <div className="mt-16 flex justify-center gap-4 text-2xl opacity-30">
-                    <span>❄</span>
-                    <span>❅</span>
-                    <span>❆</span>
-                    <span>❅</span>
-                    <span>❄</span>
-                </div>
             </main>
 
             {showCreateForm && (

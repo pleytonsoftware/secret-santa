@@ -63,7 +63,9 @@
 }
 
 @theme inline {
-    --font-sans: var(--font-geist-sans);
+    /* --font-sans: var(--font-geist-sans); */
+    --font-sans: "Montserrat", "sans-serif";
+    --font-title: "Quicksand", "sans-serif";
     --font-mono: var(--font-geist-mono);
 }
 
@@ -221,7 +223,6 @@
 }
 
 .christmas-card:hover {
-    transform: translateY(-8px) scale(1.02);
     border-color: rgba(234, 179, 8, 0.5);
     box-shadow: 0 20px 40px rgba(200, 30, 30, 0.15),
         0 10px 20px rgba(20, 83, 45, 0.1), 0 0 0 1px rgba(234, 179, 8, 0.3);
@@ -262,4 +263,13 @@
             rgba(255, 255, 255, 0.8) 100%
         ),
         linear-gradient(135deg, #fef3f3 0%, #f0fdf4 50%, #fefce8 100%);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-title);
 }

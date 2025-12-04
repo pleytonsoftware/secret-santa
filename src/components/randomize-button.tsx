@@ -3,6 +3,10 @@
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
+import DiceIcon from "@/icons/dice.svg";
+import { Icon } from "./icon";
+import SparkleIcon from "@/icons/sparkles.svg";
+import TreeIcon from "@/icons/tree.svg";
 
 interface RandomizeButtonProps {
     groupId: string;
@@ -80,7 +84,7 @@ export function RandomizeButton({
                     className={`relative btn btn-lg w-full gap-3 text-lg ${
                         isDisabled
                             ? "btn-disabled"
-                            : "btn-primary bg-linear-to-tl from-primary via-primary to-secondary border-0 hover:from-primary/90 hover:to-secondary/90 shadow-xl hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
+                            : "btn-primary bg-primary border-0 hover:bg-primary/90 shadow-xl hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
                     }`}
                 >
                     {isLoading ? (
@@ -89,15 +93,12 @@ export function RandomizeButton({
                             <span className="animate-pulse">
                                 {t("randomize.sending")}
                             </span>
-                            <span className="text-2xl animate-bounce">🎄</span>
+                            <Icon Render={TreeIcon} size="sm" />
                         </>
                     ) : (
                         <>
-                            <span className="text-2xl animate-bounce-subtle">
-                                🎲
-                            </span>
+                            <Icon Render={DiceIcon} size="sm" />
                             {t("randomize.button")}
-                            <span className="text-2xl">✨</span>
                         </>
                     )}
                 </button>

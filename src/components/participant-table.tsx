@@ -3,6 +3,21 @@
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Icon } from "./icon";
+import SilhouetteIcon from "@/icons/silhouette.svg";
+import SilhouetteSingleIcon from "@/icons/silhouette-single.svg";
+import IncomingEnvelopeIcon from "@/icons/incoming-envelope.svg";
+import CheckMarkIcon from "@/icons/check-mark.svg";
+import EnvelopeIcon from "@/icons/envelope.svg";
+import BinIcon from "@/icons/bin.svg";
+import SantaClausIcon from "@/icons/santa-claus.svg";
+import SantaClausIcon2 from "@/icons/santa-claus-dark-skin.svg";
+import SantaClausIcon3 from "@/icons/santa-claus-mrs.svg";
+import SantaClausIcon4 from "@/icons/santa-claus-mx.svg";
+import DeerIcon from "@/icons/deer.svg";
+import TreeIcon from "@/icons/tree.svg";
+import GiftIcon from "@/icons/gift.svg";
+import BellIcon from "@/icons/bell.svg";
 
 interface Participant {
     id: string;
@@ -37,6 +52,16 @@ const avatarEmojis = [
     "❄️",
     "🔔",
     "🧝",
+];
+const AvatarIcons = [
+    SantaClausIcon,
+    SantaClausIcon2,
+    SantaClausIcon3,
+    SantaClausIcon4,
+    DeerIcon,
+    TreeIcon,
+    GiftIcon,
+    BellIcon,
 ];
 
 export function ParticipantTable({
@@ -144,25 +169,19 @@ export function ParticipantTable({
 
     // Get a consistent emoji for each participant based on their index
     const getParticipantEmoji = (index: number) => {
-        return avatarEmojis[index % avatarEmojis.length];
+        // return avatarEmojis[index % avatarEmojis.length];
+        return AvatarIcons[index % AvatarIcons.length];
     };
 
     if (participants.length === 0) {
         return (
             <div className="text-center py-12 relative">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl" />
-                <div className="relative">
-                    <span className="text-6xl mb-4 block animate-bounce-subtle">
-                        👥
-                    </span>
+                <div className="relative flex flex-col items-center justify-center gap-4">
+                    <Icon Render={SilhouetteIcon} size="md" />
                     <p className="text-base-content/60 text-lg">
                         {t("group.noParticipants")}
                     </p>
-                    <div className="mt-4 flex justify-center gap-2 text-2xl opacity-40">
-                        <span>🎅</span>
-                        <span>🤶</span>
-                        <span>🦌</span>
-                    </div>
                 </div>
             </div>
         );
@@ -175,13 +194,13 @@ export function ParticipantTable({
                     <tr>
                         <th className="text-base-content/80">
                             <span className="flex items-center gap-2">
-                                <span>👤</span>
+                                <Icon Render={SilhouetteSingleIcon} size="xs" />
                                 {t("common.name")}
                             </span>
                         </th>
                         <th className="text-base-content/80">
                             <span className="flex items-center gap-2">
-                                <span>📧</span>
+                                <Icon Render={IncomingEnvelopeIcon} size="sm" />
                                 {t("common.email")}
                             </span>
                         </th>
@@ -198,8 +217,11 @@ export function ParticipantTable({
                         >
                             <td>
                                 <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
-                                        {getParticipantEmoji(index)}
+                                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-xl transition-transform">
+                                        <Icon
+                                            Render={getParticipantEmoji(index)}
+                                            size="xs"
+                                        />
                                     </div>
                                     <span className="font-medium">
                                         {participant.name}
@@ -213,7 +235,10 @@ export function ParticipantTable({
                                 {isFinalized ? (
                                     <div className="flex items-center justify-end gap-2">
                                         <span className="badge badge-success badge-sm gap-1">
-                                            <span>✅</span>
+                                            <Icon
+                                                Render={CheckMarkIcon}
+                                                className="text-[currentColor] size-2.5!"
+                                            />
                                             {t("group.assigned")}
                                         </span>
                                         {groupId && (
@@ -255,7 +280,12 @@ export function ParticipantTable({
                                                     <span className="loading loading-spinner loading-xs"></span>
                                                 ) : (
                                                     <>
-                                                        <span>📧</span>
+                                                        <Icon
+                                                            Render={
+                                                                EnvelopeIcon
+                                                            }
+                                                            className="fill-[currentColor] size-2.5!"
+                                                        />
                                                         {t(
                                                             "resend.buttonIndividualShort",
                                                         )}
@@ -276,7 +306,10 @@ export function ParticipantTable({
                                             <span className="loading loading-spinner loading-xs"></span>
                                         ) : (
                                             <>
-                                                <span>🗑️</span>
+                                                <Icon
+                                                    Render={BinIcon}
+                                                    size="xs"
+                                                />
                                                 {t("common.remove")}
                                             </>
                                         )}

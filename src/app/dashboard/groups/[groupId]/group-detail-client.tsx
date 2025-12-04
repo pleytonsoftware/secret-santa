@@ -11,6 +11,21 @@ import { AddParticipantForm } from "@/components/add-participant-form";
 import { RandomizeButton } from "@/components/randomize-button";
 import { ResendEmailButton } from "@/components/resend-email-button";
 import { LoadingSpinner } from "@/components/loading-spinner";
+import MemoIcon from "@/icons/memo.svg";
+import ClipboardIcon from "@/icons/clipboard.svg";
+import { Icon } from "@/components/icon";
+import FloppyDiskIcon from "@/icons/floppy-disk.svg";
+import PartyPopperIcon from "@/icons/party-popper.svg";
+import GiftIcon from "@/icons/gift.svg";
+import PackageIcon from "@/icons/package.svg";
+import CheckMarkIcon from "@/icons/check-mark.svg";
+import HourglassIcon from "@/icons/hourglass.svg";
+import PencilIcon from "@/icons/pencil.svg";
+import BinIcon from "@/icons/bin.svg";
+import IncomingEnvelopeIcon from "@/icons/incoming-envelope.svg";
+import PlusIcon from "@/icons/plus.svg";
+import SilhouetteIcon from "@/icons/silhouette.svg";
+import DiceIcon from "@/icons/dice.svg";
 
 interface Participant {
     id: string;
@@ -165,9 +180,7 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
                 <div className="text-center">
                     <LoadingSpinner size="lg" />
                     <p className="mt-4 text-base-content/60 animate-pulse">
-                        {locale === "es"
-                            ? "Cargando grupo..."
-                            : "Loading group..."}
+                        {t("group.loadingGroup")}
                     </p>
                 </div>
             </div>
@@ -198,9 +211,6 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
                         ←
                     </span>
                     <span>{t("common.back")}</span>
-                    <span className="text-lg opacity-0 group-hover:opacity-100 transition-opacity">
-                        🎄
-                    </span>
                 </button>
 
                 {/* Finalized banner with festive styling */}
@@ -209,8 +219,8 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
                         <div className="absolute inset-0 bg-linear-to-tl from-success/20 via-success/10 to-success/20 animate-pulse" />
                         <div className="relative alert bg-linear-to-tl from-success/90 to-success border-2 border-success shadow-lg">
                             <div className="flex items-center gap-4">
-                                <span className="text-4xl animate-bounce-subtle">
-                                    🎉
+                                <span className="text-4xl">
+                                    <Icon Render={PartyPopperIcon} size="lg" />
                                 </span>
                                 <div>
                                     <h3 className="font-bold text-lg text-success-content">
@@ -220,9 +230,6 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
                                         {t("group.finalizedDescription")}
                                     </p>
                                 </div>
-                                <span className="text-3xl ml-auto animate-float">
-                                    🎅
-                                </span>
                             </div>
                         </div>
                     </div>
@@ -231,11 +238,6 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
                 {/* Group header card with festive styling */}
                 <div className="christmas-card card bg-base-100/95 backdrop-blur-sm shadow-xl mb-6 border-2 border-transparent hover:border-accent/30">
                     <div className="card-body relative">
-                        {/* Decorative corner elements */}
-                        <div className="absolute top-2 right-2 text-2xl opacity-30">
-                            🎄
-                        </div>
-
                         {isEditing && !group.isFinalized ? (
                             <form
                                 onSubmit={handleUpdateGroup}
@@ -244,7 +246,13 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text font-semibold flex items-center gap-2">
-                                            <span>📝</span> {t("group.name")}
+                                            <span>
+                                                <Icon
+                                                    Render={MemoIcon}
+                                                    size="xs"
+                                                />
+                                            </span>{" "}
+                                            {t("group.name")}
                                         </span>
                                     </label>
                                     <input
@@ -260,7 +268,10 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text font-semibold flex items-center gap-2">
-                                            <span>📋</span>{" "}
+                                            <Icon
+                                                Render={ClipboardIcon}
+                                                size="xs"
+                                            />
                                             {t("group.description")}
                                         </span>
                                     </label>
@@ -298,7 +309,12 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
                                             <span className="loading loading-spinner loading-sm"></span>
                                         ) : (
                                             <>
-                                                <span>💾</span>
+                                                <span>
+                                                    <Icon
+                                                        Render={FloppyDiskIcon}
+                                                        size="xs"
+                                                    />
+                                                </span>
                                                 {t("common.save")}
                                             </>
                                         )}
@@ -308,8 +324,15 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
                         ) : (
                             <div className="flex justify-between items-start">
                                 <div className="flex items-start gap-4">
-                                    <div className="text-4xl animate-float">
-                                        {group.isFinalized ? "🎁" : "📦"}
+                                    <div className="text-4xl">
+                                        <Icon
+                                            Render={
+                                                group.isFinalized
+                                                    ? GiftIcon
+                                                    : PackageIcon
+                                            }
+                                            size="md"
+                                        />
                                     </div>
                                     <div>
                                         <h1 className="card-title text-2xl gradient-text">
@@ -322,38 +345,51 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
                                         )}
                                         {/* Status badge */}
                                         <div className="mt-3">
-                                            {group.isFinalized ? (
-                                                <span className="badge badge-success gap-1 badge-lg">
-                                                    <span>✅</span>{" "}
-                                                    {locale === "es"
-                                                        ? "Completado"
-                                                        : "Completed"}
-                                                </span>
-                                            ) : (
-                                                <span className="badge badge-warning gap-1 badge-lg">
-                                                    <span>⏳</span>{" "}
-                                                    {locale === "es"
-                                                        ? "En Progreso"
-                                                        : "In Progress"}
-                                                </span>
-                                            )}
+                                            <span className="badge badge-success gap-2 badge-lg text-sm w-max">
+                                                {group.isFinalized ? (
+                                                    <>
+                                                        <Icon
+                                                            Render={
+                                                                CheckMarkIcon
+                                                            }
+                                                            className="size-3!"
+                                                        />
+                                                        {t("group.completed")}
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <Icon
+                                                            Render={
+                                                                HourglassIcon
+                                                            }
+                                                            size="xs"
+                                                        />
+                                                        {t(
+                                                            "dashboard.inProgress",
+                                                        )}
+                                                    </>
+                                                )}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                                 {!group.isFinalized && (
-                                    <div className="flex gap-2">
+                                    <div className="flex flex-col md:flex-row md:gap-2">
                                         <button
                                             onClick={() => setIsEditing(true)}
                                             className="btn btn-ghost btn-sm gap-1 hover:btn-primary hover:text-primary-content transition-all"
                                         >
-                                            <span>✏️</span>
+                                            <Icon
+                                                Render={PencilIcon}
+                                                size="xs"
+                                            />
                                             {t("common.edit")}
                                         </button>
                                         <button
                                             onClick={handleDeleteGroup}
                                             className="btn btn-ghost btn-sm text-error gap-1 hover:btn-error hover:text-error-content transition-all"
                                         >
-                                            <span>🗑️</span>
+                                            <Icon Render={BinIcon} size="xs" />
                                             {t("common.delete")}
                                         </button>
                                     </div>
@@ -368,7 +404,7 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
                     <div className="card-body">
                         {/* Section header */}
                         <div className="flex items-center gap-3 mb-4">
-                            <span className="text-3xl">👥</span>
+                            <Icon Render={SilhouetteIcon} size="md" />
                             <h2 className="card-title text-xl">
                                 {t("group.participants")}
                             </h2>
@@ -382,21 +418,19 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
                         {group.participants.length > 0 && (
                             <div className="flex gap-4 mb-4 text-sm">
                                 <div className="flex items-center gap-2 px-3 py-1 bg-base-200/50 rounded-full">
-                                    <span>🎅</span>
                                     <span className="text-base-content/70">
                                         {group.participants.length}{" "}
-                                        {locale === "es"
-                                            ? "participantes"
-                                            : "participants"}
+                                        {t("dashboard.participants")}
                                     </span>
                                 </div>
                                 {group.isFinalized && (
                                     <div className="flex items-center gap-2 px-3 py-1 bg-success/10 rounded-full">
-                                        <span>✉️</span>
+                                        <Icon
+                                            Render={IncomingEnvelopeIcon}
+                                            size="xs"
+                                        />
                                         <span className="text-success">
-                                            {locale === "es"
-                                                ? "Emails enviados"
-                                                : "Emails sent"}
+                                            {t("group.emailsSent")}
                                         </span>
                                     </div>
                                 )}
@@ -415,11 +449,13 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
                         {!group.isFinalized && (
                             <div className="mt-6 pt-6 border-t border-base-200">
                                 <div className="flex items-center gap-2 mb-4">
-                                    <span className="text-xl">➕</span>
+                                    <Icon
+                                        Render={PlusIcon}
+                                        size="xs"
+                                        className="fill-[currentColor]"
+                                    />
                                     <h3 className="font-semibold text-base-content/80">
-                                        {locale === "es"
-                                            ? "Agregar Participante"
-                                            : "Add Participant"}
+                                        {t("group.addParticipant")}
                                     </h3>
                                 </div>
                                 <AddParticipantForm
@@ -437,17 +473,11 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
                     <div className="card-body">
                         {/* Section header */}
                         <div className="flex items-center gap-3 mb-4">
-                            <span className="text-3xl animate-bounce-subtle">
-                                🎲
-                            </span>
+                            <Icon Render={DiceIcon} size="md" />
                             <h2 className="card-title text-xl">
                                 {group.isFinalized
-                                    ? locale === "es"
-                                        ? "Gestión de Emails"
-                                        : "Email Management"
-                                    : locale === "es"
-                                    ? "Sortear Asignaciones"
-                                    : "Draw Assignments"}
+                                    ? t("group.emailManagement")
+                                    : t("group.drawAssignments")}
                             </h2>
                             <div className="flex-1 h-px bg-linear-to-tl from-accent/20 via-primary/20 to-transparent" />
                         </div>
@@ -455,12 +485,8 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
                         {/* Description text */}
                         <p className="text-base-content/60 mb-4 text-sm">
                             {group.isFinalized
-                                ? locale === "es"
-                                    ? "Puedes reenviar los emails de asignación a todos los participantes."
-                                    : "You can resend assignment emails to all participants."
-                                : locale === "es"
-                                ? "Cuando estés listo, sortea las asignaciones y envía los emails automáticamente."
-                                : "When ready, draw assignments and send emails automatically."}
+                                ? t("group.resendDescription")
+                                : t("group.drawDescription")}
                         </p>
 
                         {group.isFinalized ? (

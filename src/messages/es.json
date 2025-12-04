@@ -24,8 +24,8 @@
         "required": "Obligatorio"
     },
     "header": {
-        "title": "Amigo Invisible",
-        "dashboard": "Panel"
+        "title": "Amigo Secreto",
+        "language": "Idioma"
     },
     "dashboard": {
         "title": "Mis Grupos",
@@ -35,7 +35,12 @@
         "noGroupsHint": "¡Crea tu primer grupo para empezar!",
         "participants": "participantes",
         "finalized": "Finalizado",
-        "notFinalized": "No Finalizado"
+        "notFinalized": "No Finalizado",
+        "loadingMagic": "Cargando la magia navideña...",
+        "totalGroups": "Grupos Totales",
+        "inProgress": "En Progreso",
+        "yourGroups": "Tus Grupos",
+        "created": "Creado"
     },
     "group": {
         "title": "Detalles del Grupo",
@@ -60,7 +65,14 @@
         "finalized": "Grupo Finalizado",
         "finalizedDescription": "Las asignaciones se han realizado y los correos se han enviado. Este grupo ya no se puede editar.",
         "cannotEditFinalized": "Este grupo ha sido finalizado y no se puede editar.",
-        "assigned": "Asignado"
+        "assigned": "Asignado",
+        "loadingGroup": "Cargando grupo...",
+        "completed": "Completado",
+        "emailsSent": "Emails enviados",
+        "emailManagement": "Gestión de Emails",
+        "drawAssignments": "Sortear Asignaciones",
+        "resendDescription": "Puedes reenviar los emails de asignación a todos los participantes.",
+        "drawDescription": "Cuando estés listo, sortea las asignaciones y envía los emails automáticamente."
     },
     "randomize": {
         "button": "Sortear y Enviar Correos",
@@ -101,5 +113,10 @@
         "emailRequired": "El correo electrónico es obligatorio",
         "emailInvalid": "Por favor, ingresa un correo electrónico válido",
         "groupNameRequired": "El nombre del grupo es obligatorio"
+    },
+    "home": {
+        "gifts": "Regalos",
+        "holiday": "Festividad",
+        "magic": "Magia"
     }
 }

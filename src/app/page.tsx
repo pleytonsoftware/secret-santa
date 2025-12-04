@@ -107,7 +107,7 @@ export default async function Home() {
                                 <Icon Render={GiftIcon} size="lg" />
                             </div>
                             <span className="text-sm text-base-content/60 font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                                {locale === "es" ? "Regalos" : "Gifts"}
+                                {messages.home.gifts}
                             </span>
                         </div>
                         <div className="flex flex-col items-center gap-3 group">
@@ -115,7 +115,7 @@ export default async function Home() {
                                 <Icon Render={TreeIcon} size="lg" />
                             </div>
                             <span className="text-sm text-base-content/60 font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                                {locale === "es" ? "Festividad" : "Holiday"}
+                                {messages.home.holiday}
                             </span>
                         </div>
                         <div className="flex flex-col items-center gap-3 group">
@@ -126,7 +126,7 @@ export default async function Home() {
                                 <Icon Render={SparkleIcon} size="lg" />
                             </div>
                             <span className="text-sm text-base-content/60 font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                                {locale === "es" ? "Magia" : "Magic"}
+                                {messages.home.magic}
                             </span>
                         </div>
                     </div>
@@ -172,7 +172,10 @@ export default async function Home() {
                 <div className="absolute bottom-0 left-0 right-0 h-2 shimmer-border" />
                 <div className="flex items-center justify-center gap-2 text-base-content/60 text-sm">
                     <span>🎄</span>
-                    <span>© {new Date().getFullYear()} Secret Santa App</span>
+                    <span>
+                        © {new Date().getFullYear()} Secret Santa App by{" "}
+                        <a href="https://pleyt.dev">@pleyt.dev</a>
+                    </span>
                     <span>🎄</span>
                 </div>
             </footer>
