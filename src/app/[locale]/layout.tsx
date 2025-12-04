@@ -32,10 +32,7 @@ export async function generateMetadata({
     const t = await getTranslations({ locale, namespace: "seo.home" });
 
     return {
-        title: {
-            default: t("title"),
-            template: "%s | Secret Santa",
-        },
+        title: t("title"),
         description: t("description"),
         keywords: t("keywords"),
         authors: [{ name: "Secret Santa App" }],

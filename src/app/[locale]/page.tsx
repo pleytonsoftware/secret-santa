@@ -4,7 +4,6 @@ import { LoginButton } from "@/components/login-button";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { Snowfall } from "@/components/snowfall";
 import { StructuredData } from "@/components/structured-data";
-import { Logo } from "@/components/logo";
 import TreeIcon from "@/icons/tree.svg";
 import SparkleIcon from "@/icons/sparkles.svg";
 import GiftIcon from "@/icons/gift.svg";
@@ -16,6 +15,7 @@ import BellIcon from "@/icons/bell.svg";
 import { Icon } from "@/components/icon";
 import { getTranslations } from "next-intl/server";
 import { redirect as nextIntlRedirect } from "@/routing";
+import { SuperSanta64Logo } from "@/components/super-santa64-logo";
 
 export default async function Home({
     params,
@@ -68,8 +68,8 @@ export default async function Home({
                     <div className="text-center max-w-2xl mx-auto">
                         {/* Animated Santa */}
                         <div className="relative mb-8">
-                            <div className="text-[120px] sm:text-[150px] animate-bounce-subtle inline-block">
-                                <Logo width={150} height={150} />
+                            <div className="inline-block">
+                                <SuperSanta64Logo />
                             </div>
                             {/* Sparkle effects around Santa */}
                             <span className="absolute top-4 left-1/4 text-2xl animate-sparkle">
