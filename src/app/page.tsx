@@ -173,8 +173,13 @@ export default async function Home() {
                 <div className="flex items-center justify-center gap-2 text-base-content/60 text-sm">
                     <span>🎄</span>
                     <span>
-                        © {new Date().getFullYear()} Secret Santa App by{" "}
-                        <a href="https://pleyt.dev">@pleyt.dev</a>
+                        © {new Date().getFullYear()} {messages.appName}{" "}
+                        <a
+                            href="https://pleyt.dev"
+                            className="btn btn-link p-0 border-0 h-auto"
+                        >
+                            @pleyt.dev
+                        </a>
                     </span>
                     <span>🎄</span>
                 </div>

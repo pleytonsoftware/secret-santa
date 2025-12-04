@@ -1,4 +1,5 @@
 {
+    "appName": "Secret Santa",
     "auth": {
         "login": "Sign in with Google",
         "logout": "Sign out",

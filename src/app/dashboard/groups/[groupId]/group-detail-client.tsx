@@ -504,15 +504,30 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
                         )}
                     </div>
                 </div>
+                <footer className="relative py-6 text-center z-10">
+                    <div className="flex items-center justify-center gap-2 text-base-content/60 text-sm">
+                        <span>🎄</span>
+                        <span>
+                            © {new Date().getFullYear()} {t("appName")}{" "}
+                            <a
+                                className="btn btn-link p-0 border-0 h-auto"
+                                href="https://pleyt.dev"
+                            >
+                                @pleyt.dev
+                            </a>
+                        </span>
+                        <span>🎄</span>
+                    </div>
+                </footer>
 
                 {/* Bottom decorative elements */}
-                <div className="mt-12 flex justify-center gap-4 text-2xl opacity-30">
+                {/* <div className="mt-12 flex justify-center gap-4 text-2xl opacity-30">
                     <span className="animate-float">🎄</span>
                     <span className="animate-float-delayed">⭐</span>
                     <span className="animate-float">🎁</span>
                     <span className="animate-float-delayed">❄️</span>
                     <span className="animate-float">🦌</span>
-                </div>
+                </div> */}
             </main>
         </div>
     );

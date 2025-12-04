@@ -258,6 +258,21 @@ export function DashboardClient({ locale }: DashboardClientProps) {
                     </>
                 )}
             </main>
+            <footer className="relative py-6 text-center z-10">
+                <div className="flex items-center justify-center gap-2 text-base-content/60 text-sm">
+                    <span>🎄</span>
+                    <span>
+                        © {new Date().getFullYear()} {t("appName")}{" "}
+                        <a
+                            className="btn btn-link p-0 border-0 h-auto"
+                            href="https://pleyt.dev"
+                        >
+                            @pleyt.dev
+                        </a>
+                    </span>
+                    <span>🎄</span>
+                </div>
+            </footer>
 
             {showCreateForm && (
                 <CreateGroupForm

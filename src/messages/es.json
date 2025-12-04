@@ -1,4 +1,5 @@
 {
+    "appName": "Aplicación de Amigo Invisible por",
     "auth": {
         "login": "Iniciar sesión con Google",
         "logout": "Cerrar sesión",
