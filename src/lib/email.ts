@@ -126,7 +126,7 @@ export async function sendSecretSantaEmail({
                   <td style="background: #f9fafb; padding: 30px; text-align: center; border-top: 1px solid #e5e7eb;">
                     <div style="text-align: center; padding: 20px; color: #9ca3af;">
                       <span>
-                          © ${new Date().getFullYear()} ${template.footer} by
+                          © ${new Date().getFullYear()} ${template.footer}
                           <a style="color: #9ca3af; font-weight: bold" href="https://pleyt.dev">@pleyt.dev</a>
                       </span>
                     </div>
