@@ -119,5 +119,12 @@
         "gifts": "Regalos",
         "holiday": "Festividad",
         "magic": "Magia"
+    },
+    "seo": {
+        "home": {
+            "title": "Amigo Invisible - Organiza Intercambios de Regalos Fácilmente",
+            "description": "Crea y gestiona intercambios de Amigo Invisible con facilidad. Asignación automática, notificaciones por email y privacidad total. Perfecto para familias, amigos y empresas.",
+            "keywords": "amigo invisible, amigo secreto, intercambio de regalos, regalos navideños, intercambio navideño, organizador de regalos, santa claus"
+        }
     }
 }

@@ -119,5 +119,12 @@
         "gifts": "Gifts",
         "holiday": "Holiday",
         "magic": "Magic"
+    },
+    "seo": {
+        "home": {
+            "title": "Secret Santa - Organize Gift Exchanges Easily",
+            "description": "Create and manage Secret Santa gift exchanges with ease. Automated assignment, email notifications, and complete privacy. Perfect for families, friends, and workplaces.",
+            "keywords": "secret santa, gift exchange, christmas gifts, holiday exchange, gift organizer, secret gift, santa claus"
+        }
     }
 }
