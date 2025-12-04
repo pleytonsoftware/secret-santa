@@ -1,5 +1,6 @@
 {
-    "appName": "Aplicación de Amigo Invisible por",
+    "appName": "Amigo Invisible",
+    "appNameBy": "Aplicación de Amigo Invisible por",
     "auth": {
         "login": "Iniciar sesión con Google",
         "logout": "Cerrar sesión",
@@ -25,7 +26,7 @@
         "required": "Obligatorio"
     },
     "header": {
-        "title": "Amigo Secreto",
+        "title": "Amigo Invisible",
         "language": "Idioma"
     },
     "dashboard": {
@@ -123,7 +124,7 @@
     "seo": {
         "home": {
             "title": "Amigo Invisible - Organiza Intercambios de Regalos Fácilmente",
-            "description": "Crea y gestiona intercambios de Amigo Invisible con facilidad. Asignación automática, notificaciones por email y privacidad total. Perfecto para familias, amigos y empresas.",
+            "description": "Crea y gestiona intercambios de Amigo Invisible con facilidad. Asignación automática, notificaciones por email y privacidad total.",
             "keywords": "amigo invisible, amigo secreto, intercambio de regalos, regalos navideños, intercambio navideño, organizador de regalos, santa claus"
         }
     }

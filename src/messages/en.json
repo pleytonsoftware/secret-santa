@@ -1,5 +1,6 @@
 {
-    "appName": "Secret Santa App by",
+    "appName": "Secret Santa",
+    "appNameBy": "Secret Santa App by",
     "auth": {
         "login": "Sign in with Google",
         "logout": "Sign out",
@@ -123,7 +124,7 @@
     "seo": {
         "home": {
             "title": "Secret Santa - Organize Gift Exchanges Easily",
-            "description": "Create and manage Secret Santa gift exchanges with ease. Automated assignment, email notifications, and complete privacy. Perfect for families, friends, and workplaces.",
+            "description": "Create and manage Secret Santa gift exchanges with ease. Automated assignment, email notifications, and complete privacy.",
             "keywords": "secret santa, gift exchange, christmas gifts, holiday exchange, gift organizer, secret gift, santa claus"
         }
     }

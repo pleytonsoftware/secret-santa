@@ -1,6 +1,4 @@
 import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
 import { authOptions } from "@/lib/auth";
 import { LoginButton } from "@/components/login-button";
 import { LanguageSwitcher } from "@/components/language-switcher";
@@ -16,17 +14,22 @@ import CookieIcon from "@/icons/cookie.svg";
 import GlassMilkIcon from "@/icons/glass-of-milk.svg";
 import BellIcon from "@/icons/bell.svg";
 import { Icon } from "@/components/icon";
+import { getTranslations } from "next-intl/server";
+import { redirect as nextIntlRedirect } from "@/routing";
 
-export default async function Home() {
+export default async function Home({
+    params,
+}: {
+    params: Promise<{ locale: string }>;
+}) {
+    const { locale } = await params;
     const session = await getServerSession(authOptions);
 
     if (session) {
-        redirect("/dashboard");
+        nextIntlRedirect({ href: "/dashboard", locale });
     }
 
-    const cookieStore = await cookies();
-    const locale = cookieStore.get("locale")?.value || "en";
-    const messages = (await import(`@/messages/${locale}.json`)).default;
+    const t = await getTranslations();
 
     return (
         <>
@@ -88,12 +91,12 @@ export default async function Home() {
 
                         {/* Title with Gradient */}
                         <h1 className="text-5xl sm:text-6xl md:text-7xl pb-2 font-extrabold mb-6 gradient-text drop-shadow-lg">
-                            {messages.header.title}
+                            {t("header.title")}
                         </h1>
 
                         {/* Subtitle */}
                         <p className="text-xl sm:text-2xl text-base-content/80 mb-10 max-w-lg mx-auto leading-relaxed">
-                            {messages.auth.signInPrompt}
+                            {t("auth.signInPrompt")}
                         </p>
 
                         {/* Login Button with Glow */}
@@ -110,7 +113,7 @@ export default async function Home() {
                                     <Icon Render={GiftIcon} size="lg" />
                                 </div>
                                 <span className="text-sm text-base-content/60 font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                                    {messages.home.gifts}
+                                    {t("home.gifts")}
                                 </span>
                             </div>
                             <div className="flex flex-col items-center gap-3 group">
@@ -118,7 +121,7 @@ export default async function Home() {
                                     <Icon Render={TreeIcon} size="lg" />
                                 </div>
                                 <span className="text-sm text-base-content/60 font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                                    {messages.home.holiday}
+                                    {t("home.holiday")}
                                 </span>
                             </div>
                             <div className="flex flex-col items-center gap-3 group">
@@ -129,7 +132,7 @@ export default async function Home() {
                                     <Icon Render={SparkleIcon} size="lg" />
                                 </div>
                                 <span className="text-sm text-base-content/60 font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                                    {messages.home.magic}
+                                    {t("home.magic")}
                                 </span>
                             </div>
                         </div>
@@ -176,7 +179,7 @@ export default async function Home() {
                     <div className="flex items-center justify-center gap-2 text-base-content/60 text-sm">
                         <span>🎄</span>
                         <span>
-                            © {new Date().getFullYear()} {messages.appName}{" "}
+                            © {new Date().getFullYear()} {t("appNameBy")}{" "}
                             <a
                                 href="https://pleyt.dev"
                                 className="btn btn-link p-0 border-0 h-auto"

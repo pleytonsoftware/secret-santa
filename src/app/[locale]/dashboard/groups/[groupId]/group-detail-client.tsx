@@ -508,7 +508,7 @@ export function GroupDetailClient({ groupId, locale }: GroupDetailClientProps) {
                     <div className="flex items-center justify-center gap-2 text-base-content/60 text-sm">
                         <span>🎄</span>
                         <span>
-                            © {new Date().getFullYear()} {t("appName")}{" "}
+                            © {new Date().getFullYear()} {t("appNameBy")}{" "}
                             <a
                                 className="btn btn-link p-0 border-0 h-auto"
                                 href="https://pleyt.dev"

@@ -1,7 +1,7 @@
 "use client";
 
 import type { Locale } from "@/i18n";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "@/routing";
 import { useTransition } from "react";
 
 const locales = [
@@ -15,17 +15,12 @@ interface LanguageSwitcherProps {
 
 export function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
     const router = useRouter();
+    const pathname = usePathname();
     const [isPending, startTransition] = useTransition();
 
-    const handleLocaleChange = async (locale: string) => {
-        await fetch("/api/locale", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ locale }),
-        });
-
+    const handleLocaleChange = (locale: string) => {
         startTransition(() => {
-            router.refresh();
+            router.replace(pathname, { locale });
         });
     };
 
