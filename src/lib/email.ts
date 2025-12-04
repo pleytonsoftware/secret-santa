@@ -140,7 +140,7 @@ export async function sendSecretSantaEmail({
                           <p style="color: #6b7280; font-size: 14px; margin: 0 0 15px 0;">
                             ${template.viewOnlineText}
                           </p>
-                          <a href="${viewUrl}" style="display: inline-block; background: linear-gradient(135deg, #c81e1e 0%, #14532d 100%); color: white; padding: 14px 32px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 12px rgba(200, 30, 30, 0.3);">
+                          <a href="${viewUrl}" style="display: inline-block; background: #c81e1e; color: white; padding: 14px 32px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 12px rgba(200, 30, 30, 0.3);">
                             🎁 ${template.viewOnline}
                           </a>
                         </td>

@@ -27,6 +27,7 @@ export function WishlistManager({
     onUpdate,
 }: WishlistManagerProps) {
     const t = useTranslations("wishlist");
+    const tCommon = useTranslations("common");
     const [items, setItems] = useState<WishlistItem[]>(initialItems);
     const [isAdding, setIsAdding] = useState(false);
     const [editingId, setEditingId] = useState<string | null>(null);
@@ -52,8 +53,15 @@ export function WishlistManager({
     };
 
     const handleAdd = () => {
+        setFormData({
+            name: "",
+            description: "",
+            link: "",
+            price: "",
+            priority: 0,
+        });
+        setEditingId(null);
         setIsAdding(true);
-        resetForm();
     };
 
     const handleEdit = (item: WishlistItem) => {
@@ -71,7 +79,7 @@ export function WishlistManager({
         e.preventDefault();
 
         if (!formData.name.trim()) {
-            toast.error(t("itemName") + " " + t("../common.required"));
+            toast.error(t("itemName") + " " + tCommon("required"));
             return;
         }
 
@@ -303,7 +311,7 @@ export function WishlistManager({
                             className="btn btn-sm btn-ghost"
                             disabled={isSubmitting}
                         >
-                            {t("../common.cancel")}
+                            {tCommon("cancel")}
                         </button>
                         <button
                             type="submit"
@@ -313,7 +321,7 @@ export function WishlistManager({
                             {isSubmitting ? (
                                 <span className="loading loading-spinner loading-xs"></span>
                             ) : (
-                                t("../common.save")
+                                tCommon("save")
                             )}
                         </button>
                     </div>
@@ -373,13 +381,13 @@ export function WishlistManager({
                                         onClick={() => handleEdit(item)}
                                         className="btn btn-ghost btn-xs"
                                     >
-                                        {t("../common.edit")}
+                                        {tCommon("edit")}
                                     </button>
                                     <button
                                         onClick={() => handleDelete(item.id)}
                                         className="btn btn-ghost btn-xs text-error"
                                     >
-                                        {t("../common.delete")}
+                                        {tCommon("delete")}
                                     </button>
                                 </div>
                             </div>

@@ -97,7 +97,7 @@ export function GroupCard({
                         </p>
                     )}
 
-                    <div className="mt-auto">
+                    <div className="mt-auto flex flex-col gap-1">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2 text-base-content/70 text-sm">
                                 <Icon Render={SilhouetteIcon} size="xs" />
