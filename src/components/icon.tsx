@@ -19,7 +19,7 @@ export const Icon: FC<IconProps> = ({
     size = "md",
     ...props
 }) => {
-    const classes = ["min-w-fit", sizeClasses[size], className]
+    const classes = ["w-fit", sizeClasses[size], className]
         .filter(Boolean)
         .join(" ");
     return <Render className={classes} {...props} />;
