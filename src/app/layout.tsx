@@ -28,6 +28,19 @@ export async function generateMetadata(): Promise<Metadata> {
         metadataBase: new URL(
             process.env.NEXTAUTH_URL || "http://localhost:3000",
         ),
+        // Add icons/logos here
+        icons: {
+            icon: [
+                { url: "/favicon.ico" },
+                // { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+                // { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+            ],
+            // apple: [
+            //     { url: "/apple-icon.png" },
+            //     { url: "/apple-icon-180.png", sizes: "180x180", type: "image/png" },
+            // ],
+            shortcut: "/favicon.ico",
+        },
         alternates: {
             languages: {
                 en: "/",
@@ -41,11 +54,22 @@ export async function generateMetadata(): Promise<Metadata> {
             siteName: "Secret Santa",
             title: seo.title,
             description: seo.description,
+            // Add OG image here
+            // images: [
+            //     {
+            //         url: "/og-image.png", // 1200x630 recommended
+            //         width: 1200,
+            //         height: 630,
+            //         alt: seo.title,
+            //     },
+            // ],
         },
         twitter: {
             card: "summary_large_image",
             title: seo.title,
             description: seo.description,
+            // Add Twitter image here
+            // images: ["/twitter-image.png"], // 1200x600 recommended
         },
         robots: {
             index: true,
