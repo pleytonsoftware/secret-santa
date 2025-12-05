@@ -4,6 +4,7 @@ import { routing } from "./routing";
 export const locales = ["en", "es"] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = "en";
+export const COOKIE_NAME = "NEXT_LOCALE";
 
 export default getRequestConfig(async ({ requestLocale }) => {
     // This typically corresponds to the `[locale]` segment

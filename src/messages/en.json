@@ -42,7 +42,8 @@
         "totalGroups": "Total Groups",
         "inProgress": "In Progress",
         "yourGroups": "Your Groups",
-        "created": "Created"
+        "created": "Created",
+        "hello": "Hello"
     },
     "group": {
         "title": "Group Details",
@@ -50,6 +51,16 @@
         "namePlaceholder": "Enter group name",
         "description": "Description",
         "descriptionPlaceholder": "Enter description (optional)",
+        "settings": "Group Settings",
+        "spendingLimit": "Spending Limit",
+        "spendingLimitPlaceholder": "e.g., $25 or 20€",
+        "theme": "Theme",
+        "themePlaceholder": "e.g., Books, Handmade, Funny gifts",
+        "exchangeDate": "Exchange Date",
+        "location": "Location",
+        "locationPlaceholder": "e.g., John's house, Office cafeteria",
+        "additionalRules": "Additional Rules",
+        "additionalRulesPlaceholder": "Any special instructions or rules",
         "create": "Create Group",
         "update": "Update Group",
         "delete": "Delete Group",
@@ -74,7 +85,34 @@
         "emailManagement": "Email Management",
         "drawAssignments": "Draw Assignments",
         "resendDescription": "You can resend assignment emails to all participants.",
-        "drawDescription": "When ready, draw assignments and send emails automatically."
+        "drawDescription": "When ready, draw assignments and send emails automatically.",
+        "youreGivingTo": "You're giving a gift to",
+        "assignment": "Here's your Secret Santa assignment"
+    },
+    "wishlist": {
+        "title": "My wishlist",
+        "addItem": "Add Item",
+        "editItem": "Edit Item",
+        "deleteItem": "Delete Item",
+        "noItems": "No wishlist items yet",
+        "itemName": "Item Name",
+        "itemNamePlaceholder": "What would you like?",
+        "description": "Description",
+        "descriptionPlaceholder": "Additional details (optional)",
+        "link": "Link",
+        "links": "Links",
+        "linkPlaceholder": "URL to product (optional)",
+        "storeName": "Store Name (optional)",
+        "addLink": "Add Link",
+        "price": "Price",
+        "pricePlaceholder": "e.g., $25 or 20€",
+        "priority": "Priority",
+        "priorityNormal": "Normal",
+        "priorityPreferred": "Preferred",
+        "priorityMustHave": "Must Have",
+        "deleteConfirm": "Are you sure you want to delete this item?",
+        "receiverWishlist": "{name}'s Wishlist",
+        "noWishlistYet": "{name} hasn't added any items to their wishlist yet"
     },
     "randomize": {
         "button": "Randomize & Send Emails",
@@ -82,7 +120,9 @@
         "success": "Assignments created and emails sent successfully!",
         "error": "Failed to create assignments. Please try again.",
         "sending": "Creating assignments and sending emails...",
-        "tip": "This action is permanent and will send emails to all participants."
+        "tip": "This action is permanent and will send emails to all participants.",
+        "reminder": "Remember: Keep it a secret!",
+        "happyHolidays": "Happy Holidays and enjoy the gift exchange!"
     },
     "resend": {
         "button": "Resend Emails",
@@ -105,6 +145,9 @@
         "participantAdded": "Participant added successfully!",
         "participantRemoved": "Participant removed successfully!",
         "emailsSent": "Emails sent to all participants!",
+        "itemAdded": "Item added to wishlist!",
+        "itemUpdated": "Item updated successfully!",
+        "itemDeleted": "Item deleted from wishlist!",
         "errorGeneric": "Something went wrong. Please try again.",
         "errorDuplicateEmail": "A participant with this email already exists in this group.",
         "errorInvalidEmail": "Please enter a valid email address.",
@@ -127,5 +170,16 @@
             "description": "Create and manage Secret Santa gift exchanges with ease. Automated assignment, email notifications, and complete privacy.",
             "keywords": "secret santa, gift exchange, christmas gifts, holiday exchange, gift organizer, secret gift, santa claus"
         }
+    },
+    "notFound": {
+        "title": "Page Not Found",
+        "description": "Oops! It looks like this page has been lost in the North Pole snow.",
+        "suggestions": "Here's what you can do:",
+        "checkUrl": "Check the URL for any typos",
+        "goHome": "Go back to the home page",
+        "contactSupport": "Contact support if you need help",
+        "backHome": "Back to Home",
+        "viewGroups": "View My Groups",
+        "santaMessage": "🎅 Santa's elves are working to fix this!"
     }
 }

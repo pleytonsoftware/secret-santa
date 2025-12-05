@@ -42,7 +42,8 @@
         "totalGroups": "Grupos Totales",
         "inProgress": "En Progreso",
         "yourGroups": "Tus Grupos",
-        "created": "Creado"
+        "created": "Creado",
+        "hello": "Hola"
     },
     "group": {
         "title": "Detalles del Grupo",
@@ -50,6 +51,16 @@
         "namePlaceholder": "Ingresa el nombre del grupo",
         "description": "Descripción",
         "descriptionPlaceholder": "Ingresa una descripción (opcional)",
+        "settings": "Configuración del Grupo",
+        "spendingLimit": "Límite de Gasto",
+        "spendingLimitPlaceholder": "ej., $25 o 20€",
+        "theme": "Tema",
+        "themePlaceholder": "ej., Libros, Hechos a mano, Regalos divertidos",
+        "exchangeDate": "Fecha de Intercambio",
+        "location": "Ubicación",
+        "locationPlaceholder": "ej., Casa de Juan, Cafetería de la oficina",
+        "additionalRules": "Reglas Adicionales",
+        "additionalRulesPlaceholder": "Cualquier instrucción o regla especial",
         "create": "Crear Grupo",
         "update": "Actualizar Grupo",
         "delete": "Eliminar Grupo",
@@ -65,7 +76,7 @@
         "removeParticipantConfirm": "¿Estás seguro de que deseas eliminar a este participante?",
         "minParticipants": "Necesitas al menos 2 participantes para realizar el sorteo.",
         "finalized": "Grupo Finalizado",
-        "finalizedDescription": "Las asignaciones se han realizado y los correos se han enviado. Este grupo ya no se puede editar.",
+        "finalizedDescription": "Las asignaciones se han realizado y los correos se han enviados. Este grupo ya no se puede editar.",
         "cannotEditFinalized": "Este grupo ha sido finalizado y no se puede editar.",
         "assigned": "Asignado",
         "loadingGroup": "Cargando grupo...",
@@ -74,7 +85,34 @@
         "emailManagement": "Gestión de Emails",
         "drawAssignments": "Sortear Asignaciones",
         "resendDescription": "Puedes reenviar los emails de asignación a todos los participantes.",
-        "drawDescription": "Cuando estés listo, sortea las asignaciones y envía los emails automáticamente."
+        "drawDescription": "Cuando estés listo, sortea las asignaciones y envía los emails automáticamente.",
+        "youreGivingTo": "Le darás un regalo a",
+        "assignment": "Aquí está tu asignación de Amigo Invisible"
+    },
+    "wishlist": {
+        "title": "Mi lista de deseos",
+        "addItem": "Añadir Artículo",
+        "editItem": "Editar Artículo",
+        "deleteItem": "Eliminar Artículo",
+        "noItems": "Aún no hay artículos en la lista",
+        "itemName": "Nombre del Artículo",
+        "itemNamePlaceholder": "¿Qué te gustaría?",
+        "description": "Descripción",
+        "descriptionPlaceholder": "Detalles adicionales (opcional)",
+        "link": "Enlace",
+        "links": "Enlaces",
+        "linkPlaceholder": "URL al producto (opcional)",
+        "storeName": "Nombre de la Tienda (opcional)",
+        "addLink": "Añadir Enlace",
+        "price": "Precio",
+        "pricePlaceholder": "ej., $25 o 20€",
+        "priority": "Prioridad",
+        "priorityNormal": "Normal",
+        "priorityPreferred": "Preferido",
+        "priorityMustHave": "Imprescindible",
+        "deleteConfirm": "¿Estás seguro de que deseas eliminar este artículo?",
+        "receiverWishlist": "Lista de Deseos de {name}",
+        "noWishlistYet": "{name} aún no ha añadido artículos a su lista de deseos"
     },
     "randomize": {
         "button": "Sortear y Enviar Correos",
@@ -82,7 +120,9 @@
         "success": "¡Asignaciones creadas y correos enviados con éxito!",
         "error": "Error al crear las asignaciones. Por favor, inténtalo de nuevo.",
         "sending": "Creando asignaciones y enviando correos...",
-        "tip": "Esta acción es permanente y enviará correos a todos los participantes."
+        "tip": "Esta acción es permanente y enviará correos a todos los participantes.",
+        "reminder": "Recuerda: ¡Mantenlo en secreto!",
+        "happyHolidays": "¡Felices Fiestas y disfruta el intercambio de regalos!"
     },
     "resend": {
         "button": "Reenviar Correos",
@@ -105,6 +145,9 @@
         "participantAdded": "¡Participante añadido con éxito!",
         "participantRemoved": "¡Participante eliminado con éxito!",
         "emailsSent": "¡Correos enviados a todos los participantes!",
+        "itemAdded": "¡Artículo añadido a la lista de deseos!",
+        "itemUpdated": "¡Artículo actualizado con éxito!",
+        "itemDeleted": "¡Artículo eliminado de la lista de deseos!",
         "errorGeneric": "Algo salió mal. Por favor, inténtalo de nuevo.",
         "errorDuplicateEmail": "Ya existe un participante con este correo en este grupo.",
         "errorInvalidEmail": "Por favor, ingresa un correo electrónico válido.",
@@ -127,5 +170,16 @@
             "description": "Crea y gestiona intercambios de Amigo Invisible con facilidad. Asignación automática, notificaciones por email y privacidad total.",
             "keywords": "amigo invisible, amigo secreto, intercambio de regalos, regalos navideños, intercambio navideño, organizador de regalos, santa claus"
         }
+    },
+    "notFound": {
+        "title": "Página No Encontrada",
+        "description": "¡Ups! Parece que esta página se ha perdido en la nieve del Polo Norte.",
+        "suggestions": "Esto es lo que puedes hacer:",
+        "checkUrl": "Verifica que la URL no tenga errores",
+        "goHome": "Volver a la página principal",
+        "contactSupport": "Contactar al soporte si necesitas ayuda",
+        "backHome": "Volver al Inicio",
+        "viewGroups": "Ver Mis Grupos",
+        "santaMessage": "🎅 ¡Los duendes de Santa están trabajando para arreglarlo!"
     }
 }

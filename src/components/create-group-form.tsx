@@ -18,6 +18,11 @@ export function CreateGroupForm({ onCancel, onSuccess }: CreateGroupFormProps) {
     const router = useRouter();
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
+    const [spendingLimit, setSpendingLimit] = useState("");
+    const [theme, setTheme] = useState("");
+    const [exchangeDate, setExchangeDate] = useState("");
+    const [location, setLocation] = useState("");
+    const [additionalRules, setAdditionalRules] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -36,6 +41,11 @@ export function CreateGroupForm({ onCancel, onSuccess }: CreateGroupFormProps) {
                 body: JSON.stringify({
                     name: name.trim(),
                     description: description.trim() || undefined,
+                    spendingLimit: spendingLimit.trim() || undefined,
+                    theme: theme.trim() || undefined,
+                    exchangeDate: exchangeDate || undefined,
+                    location: location.trim() || undefined,
+                    additionalRules: additionalRules.trim() || undefined,
                 }),
             });
 
@@ -93,6 +103,87 @@ export function CreateGroupForm({ onCancel, onSuccess }: CreateGroupFormProps) {
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                             placeholder={t("group.descriptionPlaceholder")}
+                            rows={3}
+                            className="textarea textarea-bordered w-full"
+                            disabled={isLoading}
+                        />
+                    </div>
+
+                    <div className="divider">{t("group.settings")}</div>
+
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">
+                                {t("group.spendingLimit")}
+                            </span>
+                        </label>
+                        <input
+                            type="text"
+                            value={spendingLimit}
+                            onChange={(e) => setSpendingLimit(e.target.value)}
+                            placeholder={t("group.spendingLimitPlaceholder")}
+                            className="input input-bordered w-full"
+                            disabled={isLoading}
+                        />
+                    </div>
+
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">
+                                {t("group.theme")}
+                            </span>
+                        </label>
+                        <input
+                            type="text"
+                            value={theme}
+                            onChange={(e) => setTheme(e.target.value)}
+                            placeholder={t("group.themePlaceholder")}
+                            className="input input-bordered w-full"
+                            disabled={isLoading}
+                        />
+                    </div>
+
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">
+                                {t("group.exchangeDate")}
+                            </span>
+                        </label>
+                        <input
+                            type="date"
+                            value={exchangeDate}
+                            onChange={(e) => setExchangeDate(e.target.value)}
+                            className="input input-bordered w-full"
+                            disabled={isLoading}
+                        />
+                    </div>
+
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">
+                                {t("group.location")}
+                            </span>
+                        </label>
+                        <input
+                            type="text"
+                            value={location}
+                            onChange={(e) => setLocation(e.target.value)}
+                            placeholder={t("group.locationPlaceholder")}
+                            className="input input-bordered w-full"
+                            disabled={isLoading}
+                        />
+                    </div>
+
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">
+                                {t("group.additionalRules")}
+                            </span>
+                        </label>
+                        <textarea
+                            value={additionalRules}
+                            onChange={(e) => setAdditionalRules(e.target.value)}
+                            placeholder={t("group.additionalRulesPlaceholder")}
                             rows={3}
                             className="textarea textarea-bordered w-full"
                             disabled={isLoading}

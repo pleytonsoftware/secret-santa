@@ -16,6 +16,7 @@ import { Icon } from "@/components/icon";
 import { getTranslations } from "next-intl/server";
 import { redirect as nextIntlRedirect } from "@/routing";
 import { SuperSanta64Logo } from "@/components/super-santa64-logo";
+import { Footer } from "@/components/footer";
 
 export default async function Home({
     params,
@@ -174,22 +175,7 @@ export default async function Home({
                 </main>
 
                 {/* Footer with decorative border */}
-                <footer className="relative py-6 text-center z-10">
-                    <div className="absolute bottom-0 left-0 right-0 h-2 shimmer-border" />
-                    <div className="flex items-center justify-center gap-2 text-base-content/60 text-sm">
-                        <span>🎄</span>
-                        <span>
-                            © {new Date().getFullYear()} {t("appNameBy")}{" "}
-                            <a
-                                href="https://pleyt.dev"
-                                className="btn btn-link p-0 border-0 h-auto"
-                            >
-                                @pleyt.dev
-                            </a>
-                        </span>
-                        <span>🎄</span>
-                    </div>
-                </footer>
+                <Footer withShimmer />
             </div>
         </>
     );

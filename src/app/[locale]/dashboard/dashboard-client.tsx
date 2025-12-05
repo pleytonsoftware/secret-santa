@@ -14,6 +14,7 @@ import SantaIcon from "@/icons/santa-claus.svg";
 import SilhouetteIcon from "@/icons/silhouette.svg";
 import CheckIcon from "@/icons/check.svg";
 import HourglassIcon from "@/icons/hourglass.svg";
+import { Footer } from "@/components/footer";
 
 interface Group {
     id: string;
@@ -258,21 +259,7 @@ export function DashboardClient({ locale }: DashboardClientProps) {
                     </>
                 )}
             </main>
-            <footer className="relative py-6 text-center z-10">
-                <div className="flex items-center justify-center gap-2 text-base-content/60 text-sm">
-                    <span>🎄</span>
-                    <span>
-                        © {new Date().getFullYear()} {t("appNameBy")}{" "}
-                        <a
-                            className="btn btn-link p-0 border-0 h-auto"
-                            href="https://pleyt.dev"
-                        >
-                            @pleyt.dev
-                        </a>
-                    </span>
-                    <span>🎄</span>
-                </div>
-            </footer>
+            <Footer />
 
             {showCreateForm && (
                 <CreateGroupForm

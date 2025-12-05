@@ -25,7 +25,7 @@ export function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
     };
 
     return (
-        <div className="join">
+        <div className="join gap-[1px]">
             {locales.map((locale) => (
                 <button
                     key={locale.code}
@@ -34,8 +34,10 @@ export function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
                     className={`btn btn-sm join-item ${
                         currentLocale === locale.code
                             ? "btn-primary"
-                            : "btn-ghost bg-base-100"
-                    } ${isPending ? "loading" : ""}`}
+                            : "btn-ghost"
+                    } ${
+                        isPending ? "loading" : ""
+                    } bg-base-100 hover:bg-base-100`}
                     title={locale.label}
                 >
                     {locale.flag}

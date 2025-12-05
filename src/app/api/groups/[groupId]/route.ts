@@ -6,7 +6,12 @@ import { z } from "zod";
 
 const updateGroupSchema = z.object({
     name: z.string().min(1, "Group name is required").optional(),
-    description: z.string().optional(),
+    description: z.string().nullable().optional(),
+    spendingLimit: z.string().nullable().optional(),
+    theme: z.string().nullable().optional(),
+    exchangeDate: z.string().nullable().optional(),
+    location: z.string().nullable().optional(),
+    additionalRules: z.string().nullable().optional(),
 });
 
 interface RouteParams {
@@ -106,15 +111,38 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
             );
         }
 
-        const { name, description } = validationResult.data;
+        const {
+            name,
+            description,
+            spendingLimit,
+            theme,
+            exchangeDate,
+            location,
+            additionalRules,
+        } = validationResult.data;
+
+        // Convert exchangeDate to ISO string if present and not null
+        let formattedExchangeDate = exchangeDate;
+        if (exchangeDate) {
+            // If already ISO, keep as is; else, convert
+            const dateObj = new Date(exchangeDate);
+            if (!isNaN(dateObj.getTime())) {
+                formattedExchangeDate = dateObj.toISOString();
+            }
+        }
 
         const updatedGroup = await prisma.secretSantaGroup.update({
-            where: {
-                id: groupId,
-            },
+            where: { id: groupId },
             data: {
                 ...(name && { name }),
                 ...(description !== undefined && { description }),
+                ...(spendingLimit !== undefined && { spendingLimit }),
+                ...(theme !== undefined && { theme }),
+                ...(formattedExchangeDate !== undefined && {
+                    exchangeDate: formattedExchangeDate,
+                }),
+                ...(location !== undefined && { location }),
+                ...(additionalRules !== undefined && { additionalRules }),
             },
         });
 
