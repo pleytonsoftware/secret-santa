@@ -118,16 +118,27 @@ model Assignment {
 }
 
 model WishlistItem {
-  id            String      @id @default(cuid())
+  id            String         @id @default(cuid())
   participantId String
-  participant   Participant @relation(fields: [participantId], references: [id], onDelete: Cascade)
+  participant   Participant    @relation(fields: [participantId], references: [id], onDelete: Cascade)
   name          String
   description   String?
-  link          String?
   price         String?
-  priority      Int         @default(0) // 0 = normal, 1 = preferred, 2 = must-have
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
+  priority      Int            @default(0) // 0 = normal, 1 = preferred, 2 = must-have
+  links         WishlistLink[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
 
   @@map("wishlist_items")
+}
+
+model WishlistLink {
+  id             String       @id @default(cuid())
+  wishlistItemId String
+  wishlistItem   WishlistItem @relation(fields: [wishlistItemId], references: [id], onDelete: Cascade)
+  url            String
+  storeName      String? // e.g., "Amazon", "eBay", "Zara"
+  createdAt      DateTime     @default(now())
+
+  @@map("wishlist_links")
 }

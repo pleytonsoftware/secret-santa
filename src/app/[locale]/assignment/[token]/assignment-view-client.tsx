@@ -5,16 +5,23 @@ import { Logo } from "@/components/logo";
 import { Snowfall } from "@/components/snowfall";
 import { LoadingSpinner } from "@/components/loading-spinner";
 import { WishlistManager } from "@/components/wishlist-manager";
+import { WishlistItemPreview } from "@/components/wishlist/wishlist-item-preview";
 import { useTranslations } from "next-intl";
 import GiftIcon from "@/icons/gift.svg";
 import SparkleIcon from "@/icons/sparkles.svg";
 import { Icon } from "@/components/icon";
 
+interface WishlistLink {
+    id: string;
+    url: string;
+    storeName: string | null;
+}
+
 interface WishlistItem {
     id: string;
     name: string;
     description: string | null;
-    link: string | null;
+    links: WishlistLink[];
     price: string | null;
     priority: number;
 }
@@ -125,7 +132,7 @@ export function AssignmentViewClient({ token }: AssignmentViewClientProps) {
                                 <div className="text-6xl mb-4 animate-bounce-subtle">
                                     <Icon Render={GiftIcon} size="lg" />
                                 </div>
-                                <h2 className="text-2xl font-semibold text-base-content mb-2">
+                                <h2 className="text-2xl font-semibold text-base-content mb-2 capitalize">
                                     {t("dashboard.hello")},{" "}
                                     {assignment.giverName}!
                                 </h2>
@@ -149,7 +156,7 @@ export function AssignmentViewClient({ token }: AssignmentViewClientProps) {
                                                     size="md"
                                                 />
                                             </span>
-                                            <p className="text-4xl font-bold gradient-text">
+                                            <p className="text-4xl font-bold gradient-text capitalize">
                                                 {assignment.receiverName}
                                             </p>
                                             <span
@@ -267,72 +274,10 @@ export function AssignmentViewClient({ token }: AssignmentViewClientProps) {
                                         <div className="space-y-3">
                                             {assignment.receiverWishlist.map(
                                                 (item) => (
-                                                    <div
+                                                    <WishlistItemPreview
                                                         key={item.id}
-                                                        className="bg-base-100 p-4 rounded-lg"
-                                                    >
-                                                        <div className="flex items-start justify-between gap-3">
-                                                            <div className="flex-1">
-                                                                <div className="flex items-center gap-2 mb-1">
-                                                                    <h4 className="font-semibold">
-                                                                        {
-                                                                            item.name
-                                                                        }
-                                                                    </h4>
-                                                                    {item.priority >
-                                                                        0 && (
-                                                                        <span
-                                                                            className={`badge badge-sm ${
-                                                                                item.priority ===
-                                                                                2
-                                                                                    ? "badge-error"
-                                                                                    : "badge-warning"
-                                                                            }`}
-                                                                        >
-                                                                            {item.priority ===
-                                                                            2
-                                                                                ? t(
-                                                                                      "wishlist.priorityMustHave",
-                                                                                  )
-                                                                                : t(
-                                                                                      "wishlist.priorityPreferred",
-                                                                                  )}
-                                                                        </span>
-                                                                    )}
-                                                                </div>
-                                                                {item.description && (
-                                                                    <p className="text-sm text-base-content/70 mb-2">
-                                                                        {
-                                                                            item.description
-                                                                        }
-                                                                    </p>
-                                                                )}
-                                                                <div className="flex gap-3 text-sm">
-                                                                    {item.price && (
-                                                                        <span className="text-base-content/60">
-                                                                            {
-                                                                                item.price
-                                                                            }
-                                                                        </span>
-                                                                    )}
-                                                                    {item.link && (
-                                                                        <a
-                                                                            href={
-                                                                                item.link
-                                                                            }
-                                                                            target="_blank"
-                                                                            rel="noopener noreferrer"
-                                                                            className="link link-primary"
-                                                                        >
-                                                                            {t(
-                                                                                "wishlist.link",
-                                                                            )}
-                                                                        </a>
-                                                                    )}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                        item={item}
+                                                    />
                                                 ),
                                             )}
                                         </div>

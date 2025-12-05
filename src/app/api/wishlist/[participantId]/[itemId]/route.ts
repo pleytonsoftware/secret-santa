@@ -23,6 +23,31 @@ export async function PATCH(request: Request, { params }: RouteParams) {
             );
         }
 
+        // Validate links array if provided
+        if (
+            body.links &&
+            (!Array.isArray(body.links) || body.links.length > 5)
+        ) {
+            return NextResponse.json(
+                { error: "Links must be an array with maximum 5 items" },
+                { status: 400 },
+            );
+        }
+
+        // If links are provided, delete existing links and create new ones
+        const linksUpdate =
+            body.links !== undefined
+                ? {
+                      deleteMany: {},
+                      create: body.links.map(
+                          (link: { url: string; storeName?: string }) => ({
+                              url: link.url.trim(),
+                              storeName: link.storeName?.trim() || null,
+                          }),
+                      ),
+                  }
+                : undefined;
+
         const updatedItem = await prisma.wishlistItem.update({
             where: { id: itemId },
             data: {
@@ -31,10 +56,6 @@ export async function PATCH(request: Request, { params }: RouteParams) {
                     body.description !== undefined
                         ? body.description?.trim() || null
                         : existingItem.description,
-                link:
-                    body.link !== undefined
-                        ? body.link?.trim() || null
-                        : existingItem.link,
                 price:
                     body.price !== undefined
                         ? body.price?.trim() || null
@@ -43,6 +64,10 @@ export async function PATCH(request: Request, { params }: RouteParams) {
                     body.priority !== undefined
                         ? body.priority
                         : existingItem.priority,
+                ...(linksUpdate && { links: linksUpdate }),
+            },
+            include: {
+                links: true,
             },
         });
 

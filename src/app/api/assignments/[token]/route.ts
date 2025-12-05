@@ -14,6 +14,11 @@ export async function GET(
                 giver: {
                     include: {
                         wishlistItems: {
+                            include: {
+                                links: {
+                                    orderBy: { createdAt: "asc" },
+                                },
+                            },
                             orderBy: [
                                 { priority: "desc" },
                                 { createdAt: "desc" },
@@ -24,6 +29,11 @@ export async function GET(
                 receiver: {
                     include: {
                         wishlistItems: {
+                            include: {
+                                links: {
+                                    orderBy: { createdAt: "asc" },
+                                },
+                            },
                             orderBy: [
                                 { priority: "desc" },
                                 { createdAt: "desc" },

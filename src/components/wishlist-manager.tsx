@@ -4,13 +4,21 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Icon } from "./icon";
+import { WishlistForm } from "./wishlist/wishlist-form";
+import { WishlistItemCard } from "./wishlist/wishlist-item-card";
 import GiftIcon from "@/icons/gift.svg";
+
+interface WishlistLink {
+    id: string;
+    url: string;
+    storeName: string | null;
+}
 
 interface WishlistItem {
     id: string;
     name: string;
     description: string | null;
-    link: string | null;
+    links: WishlistLink[];
     price: string | null;
     priority: number;
 }
@@ -27,6 +35,7 @@ export function WishlistManager({
     onUpdate,
 }: WishlistManagerProps) {
     const t = useTranslations("wishlist");
+    const tToast = useTranslations("toast");
     const tCommon = useTranslations("common");
     const [items, setItems] = useState<WishlistItem[]>(initialItems);
     const [isAdding, setIsAdding] = useState(false);
@@ -34,7 +43,7 @@ export function WishlistManager({
     const [formData, setFormData] = useState({
         name: "",
         description: "",
-        link: "",
+        links: [] as { url: string; storeName?: string }[],
         price: "",
         priority: 0,
     });
@@ -44,7 +53,7 @@ export function WishlistManager({
         setFormData({
             name: "",
             description: "",
-            link: "",
+            links: [],
             price: "",
             priority: 0,
         });
@@ -56,7 +65,7 @@ export function WishlistManager({
         setFormData({
             name: "",
             description: "",
-            link: "",
+            links: [],
             price: "",
             priority: 0,
         });
@@ -68,11 +77,15 @@ export function WishlistManager({
         setFormData({
             name: item.name,
             description: item.description || "",
-            link: item.link || "",
+            links: item.links.map((link) => ({
+                url: link.url,
+                storeName: link.storeName || undefined,
+            })),
             price: item.price || "",
             priority: item.priority,
         });
         setEditingId(item.id);
+        setIsAdding(false);
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -106,7 +119,7 @@ export function WishlistManager({
                         item.id === editingId ? updatedItem : item,
                     ),
                 );
-                toast.success(t("../toast.itemUpdated"));
+                toast.success(tToast("itemUpdated"));
             } else {
                 // Create new item
                 const response = await fetch(`/api/wishlist/${participantId}`, {
@@ -121,13 +134,13 @@ export function WishlistManager({
 
                 const newItem = await response.json();
                 setItems([...items, newItem]);
-                toast.success(t("../toast.itemAdded"));
+                toast.success(tToast("itemAdded"));
             }
 
             resetForm();
             onUpdate();
         } catch {
-            toast.error(t("../toast.errorGeneric"));
+            toast.error(tToast("errorGeneric"));
         } finally {
             setIsSubmitting(false);
         }
@@ -149,32 +162,10 @@ export function WishlistManager({
             }
 
             setItems(items.filter((item) => item.id !== id));
-            toast.success(t("../toast.itemDeleted"));
+            toast.success(tToast("itemDeleted"));
             onUpdate();
         } catch {
-            toast.error(t("../toast.errorGeneric"));
-        }
-    };
-
-    const getPriorityLabel = (priority: number) => {
-        switch (priority) {
-            case 2:
-                return t("priorityMustHave");
-            case 1:
-                return t("priorityPreferred");
-            default:
-                return t("priorityNormal");
-        }
-    };
-
-    const getPriorityColor = (priority: number) => {
-        switch (priority) {
-            case 2:
-                return "badge-error";
-            case 1:
-                return "badge-warning";
-            default:
-                return "badge-ghost";
+            toast.error(tToast("errorGeneric"));
         }
     };
 
@@ -196,136 +187,14 @@ export function WishlistManager({
             </div>
 
             {(isAdding || editingId) && (
-                <form
+                <WishlistForm
+                    formData={formData}
+                    isSubmitting={isSubmitting}
+                    isEditing={!!editingId}
+                    onChange={setFormData}
                     onSubmit={handleSubmit}
-                    className="card bg-base-200 p-4 space-y-3"
-                >
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">
-                                {t("itemName")} *
-                            </span>
-                        </label>
-                        <input
-                            type="text"
-                            value={formData.name}
-                            onChange={(e) =>
-                                setFormData({
-                                    ...formData,
-                                    name: e.target.value,
-                                })
-                            }
-                            placeholder={t("itemNamePlaceholder")}
-                            className="input input-bordered input-sm"
-                            disabled={isSubmitting}
-                            autoFocus
-                        />
-                    </div>
-
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">
-                                {t("description")}
-                            </span>
-                        </label>
-                        <textarea
-                            value={formData.description}
-                            onChange={(e) =>
-                                setFormData({
-                                    ...formData,
-                                    description: e.target.value,
-                                })
-                            }
-                            placeholder={t("descriptionPlaceholder")}
-                            className="textarea textarea-bordered textarea-sm"
-                            rows={2}
-                            disabled={isSubmitting}
-                        />
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-3">
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">{t("link")}</span>
-                            </label>
-                            <input
-                                type="url"
-                                value={formData.link}
-                                onChange={(e) =>
-                                    setFormData({
-                                        ...formData,
-                                        link: e.target.value,
-                                    })
-                                }
-                                placeholder={t("linkPlaceholder")}
-                                className="input input-bordered input-sm"
-                                disabled={isSubmitting}
-                            />
-                        </div>
-
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">{t("price")}</span>
-                            </label>
-                            <input
-                                type="text"
-                                value={formData.price}
-                                onChange={(e) =>
-                                    setFormData({
-                                        ...formData,
-                                        price: e.target.value,
-                                    })
-                                }
-                                placeholder={t("pricePlaceholder")}
-                                className="input input-bordered input-sm"
-                                disabled={isSubmitting}
-                            />
-                        </div>
-                    </div>
-
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">{t("priority")}</span>
-                        </label>
-                        <select
-                            value={formData.priority}
-                            onChange={(e) =>
-                                setFormData({
-                                    ...formData,
-                                    priority: parseInt(e.target.value),
-                                })
-                            }
-                            className="select select-bordered select-sm"
-                            disabled={isSubmitting}
-                        >
-                            <option value={0}>{t("priorityNormal")}</option>
-                            <option value={1}>{t("priorityPreferred")}</option>
-                            <option value={2}>{t("priorityMustHave")}</option>
-                        </select>
-                    </div>
-
-                    <div className="flex gap-2 justify-end">
-                        <button
-                            type="button"
-                            onClick={resetForm}
-                            className="btn btn-sm btn-ghost"
-                            disabled={isSubmitting}
-                        >
-                            {tCommon("cancel")}
-                        </button>
-                        <button
-                            type="submit"
-                            className="btn btn-sm btn-primary"
-                            disabled={isSubmitting}
-                        >
-                            {isSubmitting ? (
-                                <span className="loading loading-spinner loading-xs"></span>
-                            ) : (
-                                tCommon("save")
-                            )}
-                        </button>
-                    </div>
-                </form>
+                    onCancel={resetForm}
+                />
             )}
 
             {items.length === 0 ? (
@@ -335,63 +204,12 @@ export function WishlistManager({
             ) : (
                 <div className="space-y-2">
                     {items.map((item) => (
-                        <div
+                        <WishlistItemCard
                             key={item.id}
-                            className="card bg-base-200 p-3 hover:bg-base-300 transition-colors"
-                        >
-                            <div className="flex items-start justify-between gap-3">
-                                <div className="flex-1 space-y-1">
-                                    <div className="flex items-center gap-2">
-                                        <h4 className="font-semibold">
-                                            {item.name}
-                                        </h4>
-                                        <span
-                                            className={`badge badge-sm ${getPriorityColor(
-                                                item.priority,
-                                            )}`}
-                                        >
-                                            {getPriorityLabel(item.priority)}
-                                        </span>
-                                    </div>
-                                    {item.description && (
-                                        <p className="text-sm text-base-content/70">
-                                            {item.description}
-                                        </p>
-                                    )}
-                                    <div className="flex gap-3 text-sm">
-                                        {item.price && (
-                                            <span className="text-base-content/60">
-                                                {item.price}
-                                            </span>
-                                        )}
-                                        {item.link && (
-                                            <a
-                                                href={item.link}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="link link-primary"
-                                            >
-                                                {t("link")}
-                                            </a>
-                                        )}
-                                    </div>
-                                </div>
-                                <div className="flex gap-1">
-                                    <button
-                                        onClick={() => handleEdit(item)}
-                                        className="btn btn-ghost btn-xs"
-                                    >
-                                        {tCommon("edit")}
-                                    </button>
-                                    <button
-                                        onClick={() => handleDelete(item.id)}
-                                        className="btn btn-ghost btn-xs text-error"
-                                    >
-                                        {tCommon("delete")}
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                            item={item}
+                            onEdit={handleEdit}
+                            onDelete={handleDelete}
+                        />
                     ))}
                 </div>
             )}
