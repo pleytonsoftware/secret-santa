@@ -23,33 +23,37 @@ interface SendSecretSantaEmailParams {
 const emailTemplates = {
     en: {
         appName: "Secret Santa",
-        subject: "🎅 Your Secret Santa Assignment",
+        subject: (groupName: string) =>
+            `🎅 Your Secret Santa match is ready in "${groupName}"!`,
         greeting: (name: string) => `Hello ${name}!`,
         intro: (groupName: string) =>
-            `You have been assigned a Secret Santa gift recipient in the group "${groupName}"!`,
-        assignment: (receiverName: string) =>
-            `You will be giving a gift to: <strong>${receiverName}</strong>`,
-        reminder: "Remember: Keep it a secret! 🤫",
-        closing: "Have fun shopping and Happy Holidays!",
+            `You have someone to give a gift to in "${groupName}".`,
+        assignment: "You will give a gift to",
+        wishlist: "See what gifts they would like:",
+        yourWishlist: "Write what gifts you would like.",
+        reminder: "Remember: It's a secret!",
+        closing: "Enjoy and happy holidays!",
         footer: "Secret Santa App by",
-        viewOnline: "View Your Assignment Online",
+        viewOnline: "Check your wishlist",
         viewOnlineText:
-            "Click the button below to view your assignment anytime:",
+            "Click here to see who your Secret Santa is and their wishes, and make your wishlist:",
     },
     es: {
         appName: "Amigo Invisible",
-        subject: "🎅 Tu asignación de Amigo Invisible",
+        subject: (groupName: string) =>
+            `🎅 ¡Ya tienes a tu Amigo Invisible en "${groupName}"!`,
         greeting: (name: string) => `¡Hola ${name}!`,
         intro: (groupName: string) =>
-            `¡Se te ha asignado un destinatario de regalo en el grupo "${groupName}"!`,
-        assignment: (receiverName: string) =>
-            `Le darás un regalo a: <strong>${receiverName}</strong>`,
-        reminder: "Recuerda: ¡Mantenlo en secreto! 🤫",
-        closing: "¡Disfruta comprando y Felices Fiestas!",
+            `Tienes que dar un regalo en "${groupName}".`,
+        assignment: "Vas a dar regalos a",
+        wishlist: "Mira qué regalos le gustaría recibir:",
+        yourWishlist: "Escribe qué regalos te gustaría recibir.",
+        reminder: "Recuerda: ¡Es un secreto!",
+        closing: "¡Disfruta y felices fiestas!",
         footer: "Aplicación de Amigo Invisible de",
-        viewOnline: "Ver Tu Asignación en Línea",
+        viewOnline: "Ver tu lista de deseos",
         viewOnlineText:
-            "Haz clic en el botón para ver tu asignación en cualquier momento:",
+            "Haz clic aquí para ver quien es tu Amigo Invisible y sus deseos, y haz tu lista de deseos:",
     },
 };
 
@@ -62,6 +66,10 @@ export async function sendSecretSantaEmail({
     viewToken,
 }: SendSecretSantaEmailParams): Promise<{ success: boolean; error?: string }> {
     const template = emailTemplates[locale] || emailTemplates.en;
+    const subject =
+        typeof template.subject === "function"
+            ? template.subject(groupName)
+            : template.subject;
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
     const viewUrl = viewToken
         ? `${baseUrl}/${locale}/assignment/${viewToken}`
@@ -107,7 +115,7 @@ export async function sendSecretSantaEmail({
                         <td style="background: linear-gradient(135deg, rgba(200, 30, 30, 0.05) 0%, rgba(20, 83, 45, 0.05) 100%); padding: 30px; border-radius: 12px; border: 2px solid #eab308; box-shadow: 0 4px 12px rgba(234, 179, 8, 0.2);">
                           <div style="text-align: center; font-size: 36px; margin-bottom: 15px;">🎁</div>
                           <p style="color: #6b7280; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 10px 0; text-align: center; font-weight: 600;">
-                            You're giving to
+                            ${template.assignment}
                           </p>
                           <p style="color: #1f2937; font-size: 28px; margin: 0; text-align: center; font-weight: 700;">
                             ${receiverName}
@@ -121,7 +129,7 @@ export async function sendSecretSantaEmail({
                       <tr>
                         <td style="background: #fef3f3; padding: 20px; border-radius: 8px; border-left: 4px solid #c81e1e;">
                           <p style="color: #991b1b; font-size: 16px; margin: 0; text-align: center; font-weight: 500;">
-                            🤫 ${template.reminder}
+                            🤫 ${template.reminder} 🤫
                           </p>
                         </td>
                       </tr>
@@ -183,7 +191,7 @@ export async function sendSecretSantaEmail({
                 process.env.RESEND_FROM_EMAIL ||
                 "Secret Santa <onboarding@resend.dev>",
             to: giverEmail,
-            subject: template.subject,
+            subject,
             html: htmlContent,
         });
 
