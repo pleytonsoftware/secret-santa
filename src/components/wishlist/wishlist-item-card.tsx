@@ -57,10 +57,12 @@ export function WishlistItemCard({
 
     return (
         <div className="card bg-base-200 p-3 hover:bg-base-300 transition-colors">
-            <div className="flex items-start justify-between gap-3">
-                <div className="flex-1 space-y-1">
-                    <div className="flex items-center gap-2">
-                        <h4 className="font-semibold">{item.name}</h4>
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                <div className="flex-1 space-y-1 min-w-0">
+                    <div className="flex flex-wrap items-center gap-2">
+                        <h4 className="font-semibold wrap-break-word">
+                            {item.name}
+                        </h4>
                         <span
                             className={`badge badge-sm ${getPriorityColor(
                                 item.priority,
@@ -70,7 +72,7 @@ export function WishlistItemCard({
                         </span>
                     </div>
                     {item.description && (
-                        <p className="text-sm text-base-content/70">
+                        <p className="text-sm text-base-content/70 wrap-break-word">
                             {item.description}
                         </p>
                     )}
@@ -88,7 +90,7 @@ export function WishlistItemCard({
                                         href={link.url}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="link link-primary text-xs"
+                                        className="link link-primary text-xs break-all"
                                         title={link.url}
                                     >
                                         {link.storeName || t("link")}
@@ -99,16 +101,16 @@ export function WishlistItemCard({
                     </div>
                 </div>
                 {!readOnly && onEdit && onDelete && (
-                    <div className="flex gap-1">
+                    <div className="flex gap-1 mt-2 sm:mt-0">
                         <button
                             onClick={() => onEdit(item)}
-                            className="btn btn-ghost btn-xs"
+                            className="btn btn-outline btn-xs"
                         >
                             {tCommon("edit")}
                         </button>
                         <button
                             onClick={() => onDelete(item.id)}
-                            className="btn btn-ghost btn-xs text-error"
+                            className="btn btn-outline btn-xs text-error"
                         >
                             {tCommon("delete")}
                         </button>

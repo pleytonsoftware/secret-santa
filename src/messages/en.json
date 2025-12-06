@@ -87,7 +87,19 @@
         "resendDescription": "You can resend assignment emails to all participants.",
         "drawDescription": "When ready, draw assignments and send emails automatically.",
         "youreGivingTo": "You're giving a gift to",
-        "assignment": "Here's your Secret Santa assignment"
+        "assignment": "Here's your Secret Santa match",
+        "tapToReveal": "Tap to Reveal here",
+        "tapToRevealHint": "Press the button above to see who you're giving a gift to",
+        "hideAgain": "Hide name again",
+        "mysteryWords": [
+            "Mystery Person",
+            "Secret Friend",
+            "Hidden Name",
+            "Who Could It Be?",
+            "Top Secret",
+            "Surprise!",
+            "Guess Who?"
+        ]
     },
     "wishlist": {
         "title": "My wishlist",

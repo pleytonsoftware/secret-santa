@@ -8,8 +8,8 @@ import { WishlistManager } from "@/components/wishlist-manager";
 import { WishlistItemPreview } from "@/components/wishlist/wishlist-item-preview";
 import { useTranslations } from "next-intl";
 import GiftIcon from "@/icons/gift.svg";
-import SparkleIcon from "@/icons/sparkles.svg";
 import { Icon } from "@/components/icon";
+import { AssignmentRevealCard } from "@/components/assignment-reveal-card";
 
 interface WishlistLink {
     id: string;
@@ -142,38 +142,9 @@ export function AssignmentViewClient({ token }: AssignmentViewClientProps) {
                             </div>
 
                             {/* Assignment Card */}
-                            <div className="relative">
-                                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl" />
-                                <div className="relative bg-base-200 rounded-2xl p-8 border-2 border-accent shadow-lg">
-                                    <div className="text-center">
-                                        <p className="text-sm text-base-content/60 uppercase tracking-wider mb-3 font-semibold">
-                                            {t("group.youreGivingTo")}
-                                        </p>
-                                        <div className="flex items-center justify-center gap-3 mb-4">
-                                            <span className="text-4xl animate-sparkle">
-                                                <Icon
-                                                    Render={SparkleIcon}
-                                                    size="md"
-                                                />
-                                            </span>
-                                            <p className="text-4xl font-bold gradient-text capitalize">
-                                                {assignment.receiverName}
-                                            </p>
-                                            <span
-                                                className="text-4xl animate-sparkle"
-                                                style={{
-                                                    animationDelay: "0.3s",
-                                                }}
-                                            >
-                                                <Icon
-                                                    Render={SparkleIcon}
-                                                    size="md"
-                                                />
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <AssignmentRevealCard
+                                receiverName={assignment.receiverName}
+                            />
 
                             {/* Reminder */}
                             <div className="mt-8 bg-error/10 border-l-4 border-error rounded-lg p-4">

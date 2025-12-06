@@ -86,8 +86,20 @@
         "drawAssignments": "Sortear Asignaciones",
         "resendDescription": "Puedes reenviar los emails de asignación a todos los participantes.",
         "drawDescription": "Cuando estés listo, sortea las asignaciones y envía los emails automáticamente.",
-        "youreGivingTo": "Le darás un regalo a",
-        "assignment": "Aquí está tu asignación de Amigo Invisible"
+        "youreGivingTo": "Vas a dar un regalo a",
+        "assignment": "Aquí está tu asignación de Amigo Invisible",
+        "tapToReveal": "Toca para Revelar aquí",
+        "tapToRevealHint": "Pulsa el botón de arriba para ver a quién le darás un regalo",
+        "hideAgain": "Ocultar nombre de nuevo",
+        "mysteryWords": [
+            "Persona Misteriosa",
+            "Amigo Secreto",
+            "Nombre Oculto",
+            "¿Quién Será?",
+            "Ultra Secreto",
+            "¡Sorpresa!",
+            "¿Adivina Quién?"
+        ]
     },
     "wishlist": {
         "title": "Mi lista de deseos",

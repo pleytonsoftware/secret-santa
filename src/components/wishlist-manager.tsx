@@ -203,13 +203,16 @@ export function WishlistManager({
                 </p>
             ) : (
                 <div className="space-y-2">
-                    {items.map((item) => (
-                        <WishlistItemCard
-                            key={item.id}
-                            item={item}
-                            onEdit={handleEdit}
-                            onDelete={handleDelete}
-                        />
+                    {items.map((item, index) => (
+                        <>
+                            <hr className="border-base-content/10" />
+                            <WishlistItemCard
+                                key={item.id}
+                                item={item}
+                                onEdit={handleEdit}
+                                onDelete={handleDelete}
+                            />
+                        </>
                     ))}
                 </div>
             )}
