@@ -216,14 +216,14 @@ export function ParticipantTable({
                             className="hover:bg-accent/5 transition-colors group"
                         >
                             <td>
-                                <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-xl transition-transform">
+                                <div className="flex items-center gap-3 min-w-0">
+                                    <div className="w-10 h-10 rounded-full bg-linear-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-xl transition-transform flex-shrink-0">
                                         <Icon
                                             Render={getParticipantEmoji(index)}
                                             size="xs"
                                         />
                                     </div>
-                                    <span className="font-medium">
+                                    <span className="font-medium truncate max-w-40 sm:max-w-[16rem] min-w-0">
                                         {participant.name}
                                     </span>
                                 </div>
